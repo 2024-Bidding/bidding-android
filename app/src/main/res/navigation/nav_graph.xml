@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/splash">
 
@@ -9,6 +9,18 @@
         android:id="@+id/splash"
         android:name="com.seunghoon.bidding_android.feature.splash.SplashFragment"
         android:label="Splash"
-        tools:layout="@layout/fragment_splash" />
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/navigate_to_sign_in"
+            app:destination="@id/sign_in"
+            app:popUpTo="@id/splash" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_in"
+        android:name="com.seunghoon.bidding_android.feature.signin.SignInFragment"
+        android:label="SignIn"
+        tools:layout="@layout/fragment_sign_in" />
 
 </navigation>
