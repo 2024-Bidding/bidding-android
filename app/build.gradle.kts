@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.org.jetbrains.kotlin.serialization)
 }
 
 android {
@@ -52,4 +53,14 @@ dependencies {
     // Navigation
     api(libs.androidx.navigation.fragment.ktx)
     api(libs.androidx.navigation.ui.ktx)
+
+    // Koin
+    api(libs.io.insert.koin)
+
+    // Ktor
+    api(libs.io.ktor.android)
+    api(libs.io.ktor.serialization)
+    api(libs.io.ktor.serialization.json)
+    api(libs.io.ktor.logging)
+    api(libs.io.ktor.content.negotiation)
 }
