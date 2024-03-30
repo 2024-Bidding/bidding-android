@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.fragment
 import com.seunghoon.bidding_android.databinding.ActivityMainBinding
 import com.seunghoon.bidding_android.feature.splash.SplashFragment
+import com.seunghoon.bidding_android.navigation.NavigationRoute
 
 class MainActivity : AppCompatActivity() {
 
