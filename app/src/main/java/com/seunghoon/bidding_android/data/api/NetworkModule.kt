@@ -15,6 +15,7 @@ import io.ktor.serialization.kotlinx.json.json
 
 object NetworkModule {
     val ktorHttpClient = HttpClient {
+        expectSuccess = true
         install(ContentNegotiation) {
             json()
         }
