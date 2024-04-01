@@ -6,4 +6,8 @@
     <string name="password">비밀번호</string>
     <string name="do_sign_up">회원가입하기</string>
     <string name="do_sign_in">로그인하기</string>
+
+    <!--Sign Up-->
+    <string name="name">이름</string>
+    <string name="repeat_password">비밀번호 확인</string>
 </resources>
