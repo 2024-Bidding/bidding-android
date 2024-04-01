@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">bidding-android</string>
+
+    <!--Sign In-->
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="do_sign_up">회원가입하기</string>
+    <string name="do_sign_in">로그인하기</string>
 </resources>

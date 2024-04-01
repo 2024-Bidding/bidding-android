@@ -1,7 +1,13 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.org.jetbrains.kotlin.serialization)
 }
+
+val properties = Properties()
+properties.load(rootProject.file("./local.properties").inputStream())
 
 android {
     namespace = "com.seunghoon.bidding_android"
@@ -25,6 +31,13 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            buildConfigField(
+                type = "String",
+                name = "BASE_URL",
+                value = properties.getProperty("BASE_URL", "\"\""),
+            )
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -35,6 +48,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        buildConfig = true
     }
 }
 
@@ -52,4 +66,14 @@ dependencies {
     // Navigation
     api(libs.androidx.navigation.fragment.ktx)
     api(libs.androidx.navigation.ui.ktx)
+
+    // Koin
+    api(libs.io.insert.koin)
+
+    // Ktor
+    api(libs.io.ktor.android)
+    api(libs.io.ktor.serialization)
+    api(libs.io.ktor.serialization.json)
+    api(libs.io.ktor.logging)
+    api(libs.io.ktor.content.negotiation)
 }

@@ -11,6 +11,11 @@ activity = "1.8.0"
 constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.7.7"
 
+io-insert-koin = "3.5.3"
+io-ktor-android = "2.3.9"
+
+kotlin-serialization = "1.9.23"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
@@ -23,7 +28,17 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
+io-insert-koin = { group = "io.insert-koin", name = "koin-android", version.ref = "io-insert-koin" }
+
+io-ktor-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "io-ktor-android" }
+io-ktor-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "io-ktor-android" }
+io-ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "io-ktor-android" }
+io-ktor-logging = { group = "io.ktor", name = "ktor-client-logging-jvm", version.ref = "io-ktor-android" }
+io-ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "io-ktor-android" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+org-jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-serialization" }
+
 
