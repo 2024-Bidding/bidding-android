@@ -59,13 +59,15 @@
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="@id/til_sign_up_name"
             app:layout_constraintStart_toStartOf="@id/til_sign_up_name"
-            app:layout_constraintTop_toBottomOf="@id/til_sign_up_name">
+            app:layout_constraintTop_toBottomOf="@id/til_sign_up_name"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_sign_up_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/password" />
+                android:hint="@string/password"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,13 +79,15 @@
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="@id/til_sign_up_password"
             app:layout_constraintStart_toStartOf="@id/til_sign_up_password"
-            app:layout_constraintTop_toBottomOf="@id/til_sign_up_password">
+            app:layout_constraintTop_toBottomOf="@id/til_sign_up_password"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_sign_up_repeat_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/repeat_password" />
+                android:hint="@string/repeat_password"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
