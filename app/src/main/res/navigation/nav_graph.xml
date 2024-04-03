@@ -21,6 +21,22 @@
         android:id="@+id/sign_in"
         android:name="com.seunghoon.bidding_android.feature.signin.SignInFragment"
         android:label="SignIn"
-        tools:layout="@layout/fragment_sign_in" />
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/navigate_to_sign_up"
+            app:destination="@id/sign_up"
+            app:popUpTo="@id/sign_in" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_up"
+        android:name="com.seunghoon.bidding_android.feature.signup.SignUpFragment"
+        android:label="SignUp"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/navigate_to_sign_in"
+            app:destination="@id/sign_in"
+            app:popUpTo="@id/sign_up" />
+    </fragment>
 
 </navigation>

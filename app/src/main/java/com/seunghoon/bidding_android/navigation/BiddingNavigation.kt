@@ -6,3 +6,7 @@ import com.seunghoon.bidding_android.R
 internal fun NavController.navigateToSignIn() {
     navigate(R.id.navigate_to_sign_in)
 }
+
+internal fun NavController.navigateToSignUp() {
+    navigate(R.id.navigate_to_sign_up)
+}
