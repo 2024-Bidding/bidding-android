@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.seunghoon.bidding_android.databinding.FragmentSignInBinding
+import com.seunghoon.bidding_android.navigation.navigateToSignUp
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class SignInFragment : Fragment() {
@@ -21,7 +23,14 @@ internal class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSignInBinding.inflate(inflater)
+        collectSignInSideEffect()
+        setDoSignUpTextEvent()
+        setSignInButtonEvent()
 
+        return binding.root
+    }
+
+    private fun collectSignInSideEffect() {
         signInViewModel.collectSideEffect {
             when (it) {
                 is SignInSideEffect.Success -> {
@@ -37,10 +46,13 @@ internal class SignInFragment : Fragment() {
                 }
             }
         }
+    }
 
-        setSignInButtonEvent()
-
-        return binding.root
+    private fun setDoSignUpTextEvent() = with(binding) {
+        val navController = findNavController()
+        tvSignInDoSignUp.setOnClickListener {
+            navController.navigateToSignUp()
+        }
     }
 
     private fun setSignInButtonEvent() = with(binding) {
