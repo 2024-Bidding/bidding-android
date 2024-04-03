@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.seunghoon.bidding_android.databinding.FragmentSignInBinding
+import com.seunghoon.bidding_android.navigation.navigateToItems
 import com.seunghoon.bidding_android.navigation.navigateToSignUp
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,6 +17,10 @@ internal class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
 
     private val signInViewModel: SignInViewModel by viewModel()
+
+    private val navController by lazy {
+        findNavController()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +40,7 @@ internal class SignInFragment : Fragment() {
             when (it) {
                 is SignInSideEffect.Success -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    navController.navigateToItems()
                 }
 
                 is SignInSideEffect.InvalidPassword -> {

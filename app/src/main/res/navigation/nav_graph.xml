@@ -26,6 +26,11 @@
             android:id="@+id/navigate_to_sign_up"
             app:destination="@id/sign_up"
             app:popUpTo="@id/sign_in" />
+
+        <action
+            android:id="@+id/navigate_to_items"
+            app:destination="@id/items"
+            app:popUpTo="@id/sign_in" />
     </fragment>
 
     <fragment
@@ -37,6 +42,17 @@
             android:id="@+id/navigate_to_sign_in"
             app:destination="@id/sign_in"
             app:popUpTo="@id/sign_up" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/items"
+        android:name="com.seunghoon.bidding_android.feature.items.ItemsFragment"
+        android:label="Items"
+        tools:layout="@layout/fragment_items">
+        <action
+            android:id="@+id/navigate_to_items"
+            app:destination="@+id/items"
+            app:popUpTo="@id/sign_in" />
     </fragment>
 
 </navigation>
