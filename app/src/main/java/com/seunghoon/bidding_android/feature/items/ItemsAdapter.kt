@@ -3,6 +3,7 @@ package com.seunghoon.bidding_android.feature.items
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.seunghoon.bidding_android.databinding.ItemBinding
 
 internal class ItemsAdapter(
@@ -23,14 +24,17 @@ internal class ItemsAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
-        holder.binding.item = items[position]
+        with(holder.binding) {
+            item = items[position]
+            Glide.with(holder.itemView.context).load(items[position].imageUrl).into(imgItem)
+        }
     }
 }
 
 data class Item(
     val id: Long,
     val name: String,
-    val currentPrice: Long,
+    val currentPrice: String,
     val imageUrl: String,
     val biddingStatus: BiddingStatus,
     val endDate: String,
