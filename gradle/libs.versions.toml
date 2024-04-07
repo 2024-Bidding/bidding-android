@@ -16,6 +16,8 @@ io-ktor-android = "2.3.9"
 
 kotlin-serialization = "1.9.23"
 
+com-github-glide = "4.16.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
@@ -35,6 +37,8 @@ io-ktor-serialization = { group = "io.ktor", name = "ktor-client-serialization",
 io-ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "io-ktor-android" }
 io-ktor-logging = { group = "io.ktor", name = "ktor-client-logging-jvm", version.ref = "io-ktor-android" }
 io-ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "io-ktor-android" }
+
+com-github-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "com-github-glide" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
