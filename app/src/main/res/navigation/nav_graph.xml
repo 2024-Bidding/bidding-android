@@ -48,11 +48,6 @@
         android:id="@+id/items"
         android:name="com.seunghoon.bidding_android.feature.items.ItemsFragment"
         android:label="Items"
-        tools:layout="@layout/fragment_items">
-        <action
-            android:id="@+id/navigate_to_items"
-            app:destination="@+id/items"
-            app:popUpTo="@id/sign_in" />
-    </fragment>
+        tools:layout="@layout/fragment_items"></fragment>
 
 </navigation>
