@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.seunghoon.bidding_android.data.model.ItemsResponse
 import com.seunghoon.bidding_android.databinding.ItemBinding
+import com.seunghoon.bidding_android.domain.entity.items.ItemsEntity
 
 internal class ItemsAdapter(
-    private val items: List<Item>
+    private val items: List<ItemsEntity.ItemEntity>
 ) : RecyclerView.Adapter<ItemsAdapter.ItemsViewHolder>() {
     class ItemsViewHolder(val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -29,19 +31,4 @@ internal class ItemsAdapter(
             Glide.with(holder.itemView.context).load(items[position].imageUrl).into(imgItem)
         }
     }
-}
-
-data class Item(
-    val id: Long,
-    val name: String,
-    val currentPrice: String,
-    val imageUrl: String,
-    val biddingStatus: BiddingStatus,
-    val endDate: String,
-)
-
-enum class BiddingStatus {
-    BEFORE_BIDDING, // 입찰 전
-    IN_BIDDING, // 입찰 중
-    AFTER_BIDDING, // 입찰 완료
 }
