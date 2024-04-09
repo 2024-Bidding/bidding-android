@@ -10,3 +10,7 @@ internal fun NavController.navigateToSignIn() {
 internal fun NavController.navigateToSignUp() {
     navigate(R.id.navigate_to_sign_up)
 }
+
+internal fun NavController.navigateToItems() {
+    navigate(R.id.navigate_to_items)
+}

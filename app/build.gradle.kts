@@ -76,4 +76,7 @@ dependencies {
     api(libs.io.ktor.serialization.json)
     api(libs.io.ktor.logging)
     api(libs.io.ktor.content.negotiation)
+
+    // Glide
+    api(libs.com.github.glide)
 }

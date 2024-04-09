@@ -10,4 +10,9 @@
     <!--Sign Up-->
     <string name="name">이름</string>
     <string name="repeat_password">비밀번호 확인</string>
+
+    <!--Items-->
+    <string name="items">입찰 물품 목록</string>
+    <string name="filter">필터</string>
+    <string name="search">검색</string>
 </resources>

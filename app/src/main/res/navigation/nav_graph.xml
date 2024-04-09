@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splash">
+    app:startDestination="@id/items">
 
     <fragment
         android:id="@+id/splash"
@@ -26,6 +26,11 @@
             android:id="@+id/navigate_to_sign_up"
             app:destination="@id/sign_up"
             app:popUpTo="@id/sign_in" />
+
+        <action
+            android:id="@+id/navigate_to_items"
+            app:destination="@id/items"
+            app:popUpTo="@id/sign_in" />
     </fragment>
 
     <fragment
@@ -38,5 +43,11 @@
             app:destination="@id/sign_in"
             app:popUpTo="@id/sign_up" />
     </fragment>
+
+    <fragment
+        android:id="@+id/items"
+        android:name="com.seunghoon.bidding_android.feature.items.ItemsFragment"
+        android:label="Items"
+        tools:layout="@layout/fragment_items" />
 
 </navigation>
