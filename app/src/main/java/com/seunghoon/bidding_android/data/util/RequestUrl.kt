@@ -5,4 +5,8 @@ internal sealed class RequestUrl(val path: String) {
         val signIn = "${this.path}/login"
         val signUp = "${this.path}/signup"
     }
+
+    data object Items : RequestUrl(path = "/items") {
+
+    }
 }
