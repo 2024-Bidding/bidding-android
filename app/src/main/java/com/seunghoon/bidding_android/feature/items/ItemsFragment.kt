@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seunghoon.bidding_android.databinding.FragmentItemsBinding
+import com.seunghoon.bidding_android.navigation.navigateToRegisterItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class ItemsFragment : Fragment() {
@@ -29,6 +30,13 @@ internal class ItemsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        initView()
+        collectItemsSideEffect()
+
+        return binding.root
+    }
+
+    private fun collectItemsSideEffect() {
         viewModel.collectSideEffect {
             when (it) {
                 is ItemsSideEffect.Success -> {
@@ -37,8 +45,12 @@ internal class ItemsFragment : Fragment() {
                 }
             }
         }
-        binding.rvItems.layoutManager = LinearLayoutManager(context)
+    }
 
-        return binding.root
+    private fun initView() = with(binding) {
+        rvItems.layoutManager = LinearLayoutManager(context)
+        fabRegisterItem.setOnClickListener {
+            navController.navigateToRegisterItem()
+        }
     }
 }
