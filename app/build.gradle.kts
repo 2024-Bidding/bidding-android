@@ -37,6 +37,11 @@ android {
                 name = "BASE_URL",
                 value = properties.getProperty("BASE_URL", "\"\""),
             )
+            buildConfigField(
+                type = "String",
+                name = "FILE_BASE_URL",
+                value = properties.getProperty("FILE_BASE_URL", "\"\""),
+            )
         }
     }
     compileOptions {

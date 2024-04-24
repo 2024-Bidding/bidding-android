@@ -31,3 +31,22 @@ internal val ktorClient = HttpClient {
         header(HttpHeaders.ContentType, ContentType.Application.Json)
     }
 }
+
+internal val ktorFileClient = HttpClient {
+    expectSuccess = true
+    install(ContentNegotiation) {
+        json()
+    }
+    install(Logging) {
+        logger = object : Logger {
+            override fun log(message: String) {
+                Log.d("ktor", message)
+            }
+        }
+        level = LogLevel.BODY
+    }
+    defaultRequest {
+        url(BuildConfig.FILE_BASE_URL)
+        header(HttpHeaders.ContentType, ContentType.Application.Json)
+    }
+}
