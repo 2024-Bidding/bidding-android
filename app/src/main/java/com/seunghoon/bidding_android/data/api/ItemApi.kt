@@ -1,11 +1,14 @@
 package com.seunghoon.bidding_android.data.api
 
 import com.seunghoon.bidding_android.data.di.ktorClient
-import com.seunghoon.bidding_android.data.model.ItemsResponse
+import com.seunghoon.bidding_android.data.model.item.request.RegisterItemRequest
+import com.seunghoon.bidding_android.data.model.item.response.ItemsResponse
 import com.seunghoon.bidding_android.data.util.RequestHandler
 import com.seunghoon.bidding_android.data.util.RequestUrl
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 
 internal class ItemApi {
@@ -14,6 +17,15 @@ internal class ItemApi {
             ktorClient.get {
                 url(RequestUrl.Items.path)
             }.body<ItemsResponse>()
+        }
+    }
+
+    suspend fun registerItem(registerItemRequest: RegisterItemRequest) = runCatching {
+        RequestHandler<Unit>().request {
+            ktorClient.post {
+                url(RequestUrl.Items.path)
+                setBody(registerItemRequest)
+            }
         }
     }
 }

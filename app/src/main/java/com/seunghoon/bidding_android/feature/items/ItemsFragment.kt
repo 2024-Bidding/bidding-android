@@ -33,6 +33,8 @@ internal class ItemsFragment : Fragment() {
         initView()
         collectItemsSideEffect()
 
+        itemsAdapter = ItemsAdapter(mutableListOf())
+
         return binding.root
     }
 
@@ -40,7 +42,8 @@ internal class ItemsFragment : Fragment() {
         viewModel.collectSideEffect {
             when (it) {
                 is ItemsSideEffect.Success -> {
-                    itemsAdapter = ItemsAdapter(it.items)
+                    itemsAdapter.clearItems()
+                    itemsAdapter.addItems(it.items)
                     binding.rvItems.adapter = itemsAdapter
                 }
             }
@@ -52,5 +55,11 @@ internal class ItemsFragment : Fragment() {
         fabRegisterItem.setOnClickListener {
             navController.navigateToRegisterItem()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        itemsAdapter.clearItems()
+        viewModel.fetchItems()
     }
 }

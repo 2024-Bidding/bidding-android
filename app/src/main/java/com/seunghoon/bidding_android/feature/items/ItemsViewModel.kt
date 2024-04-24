@@ -12,11 +12,7 @@ internal class ItemsViewModel(
     private val itemApi: ItemApi,
 ) : BaseViewModel<Unit, ItemsSideEffect>(initialState = Unit) {
 
-    init {
-        fetchItems()
-    }
-
-    private fun fetchItems() {
+    fun fetchItems() {
         viewModelScope.launch(Dispatchers.IO) {
             itemApi.fetchItems().onSuccess {
                 postSideEffect(ItemsSideEffect.Success(it.toEntity().items))
