@@ -50,3 +50,15 @@ internal val ktorFileClient = HttpClient {
         header(HttpHeaders.ContentType, ContentType.Application.Json)
     }
 }
+
+internal val ktorS3Client = HttpClient {
+    expectSuccess = true
+    install(Logging) {
+        logger = object : Logger {
+            override fun log(message: String) {
+                Log.d("ktor", message)
+            }
+        }
+        level = LogLevel.ALL
+    }
+}

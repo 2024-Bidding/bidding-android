@@ -106,6 +106,7 @@ class RegisterItemFragment : Fragment() {
                             startDate = etRegisterItemStartDate.text.toString(),
                             endDate = etRegisterItemEndDate.text.toString(),
                         )
+                        registerItemViewModel.uploadFile(presignedUrls = it.presignedUrls)
                     }
                 }
 

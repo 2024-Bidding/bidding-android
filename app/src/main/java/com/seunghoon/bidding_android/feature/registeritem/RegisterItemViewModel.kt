@@ -2,6 +2,7 @@ package com.seunghoon.bidding_android.feature.registeritem
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.seunghoon.bidding_android.data.api.FileApi
 import com.seunghoon.bidding_android.data.api.ItemApi
@@ -9,7 +10,9 @@ import com.seunghoon.bidding_android.data.model.file.request.CreatePresignedUrlR
 import com.seunghoon.bidding_android.data.model.item.request.RegisterItemRequest
 import com.seunghoon.bidding_android.data.util.FileUtil
 import com.seunghoon.bidding_android.feature.base.BaseViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.io.File
 import java.time.LocalDate
@@ -72,15 +75,31 @@ internal class RegisterItemViewModel(
                     }
                 )
             ).onSuccess {
-                postSideEffect(RegisterItemSideEffect.SuccessCreatePresignedUrl(filePath = it.urls.map { it.filePath }))
+                postSideEffect(
+                    RegisterItemSideEffect.SuccessCreatePresignedUrl(
+                        filePath = it.urls.map { it.filePath },
+                        presignedUrls = it.urls.map { it.preSignedUrl },
+                    )
+                )
             }.onFailure {
 
             }
         }
     }
 
-    fun uploadFile() {
-        // TODO
+    fun uploadFile(presignedUrls: List<String>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            presignedUrls.forEachIndexed { index, s ->
+                fileApi.uploadFile(
+                    presignedUrl = s,
+                    file = files[index],
+                ).onSuccess {
+                    cancel()
+                }.onFailure {
+                    Log.d("TEST", it.toString())
+                }
+            }
+        }
     }
 
     internal fun addUri(
@@ -139,5 +158,8 @@ internal data class RegisterItemState(
 internal sealed interface RegisterItemSideEffect {
     data object Success : RegisterItemSideEffect
     data class Failure(val message: String) : RegisterItemSideEffect
-    data class SuccessCreatePresignedUrl(val filePath: List<String>) : RegisterItemSideEffect
+    data class SuccessCreatePresignedUrl(
+        val filePath: List<String>,
+        val presignedUrls: List<String>,
+    ) : RegisterItemSideEffect
 }
