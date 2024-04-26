@@ -26,8 +26,10 @@ internal class ItemsAdapter(
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
         with(holder.binding) {
-            item = items[position].copy(imageUrl = "https://jobis-store.s3.ap-northeast-2.amazonaws.com/" + items[position].imageUrl)
-            Glide.with(holder.itemView.context).load(items[position].imageUrl).into(imgItem)
+            item = items[position]
+            Glide.with(holder.itemView.context)
+                .load("https://jobis-store.s3.ap-northeast-2.amazonaws.com/" + items[position].imageUrl)
+                .into(imgItem)
         }
     }
 
