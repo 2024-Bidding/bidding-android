@@ -26,27 +26,53 @@
             app:title="@string/do_register_item"
             app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_view_register_item"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+        <HorizontalScrollView
+            android:id="@+id/hr_sv_images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
             android:layout_marginStart="20dp"
             android:layout_marginTop="48dp"
-            android:backgroundTint="@color/white"
-            app:cardCornerRadius="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_register_item"
-            app:strokeColor="#D9D9D9"
-            app:strokeWidth="2dp">
+            app:layout_constraintTop_toBottomOf="@id/toolbar_register_item">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_add_photo"
-                app:tint="#9D9D9D" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_register_item">
 
-        </com.google.android.material.card.MaterialCardView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_images"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_view_register_item"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="#D9D9D9"
+                    app:strokeWidth="2dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_add_photo"
+                        app:tint="#9D9D9D" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tl_register_item_title"
@@ -56,7 +82,7 @@
             android:layout_marginTop="36dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_view_register_item">
+            app:layout_constraintTop_toBottomOf="@id/hr_sv_images">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_register_item_title"

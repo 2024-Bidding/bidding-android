@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
@@ -27,6 +28,8 @@ class RegisterItemFragment : Fragment() {
         findNavController()
     }
 
+    private lateinit var registerImageAdapter: RegisterImageAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,29 +37,42 @@ class RegisterItemFragment : Fragment() {
     ) = with(FragmentRegisterItemBinding.inflate(inflater)) {
         binding = this
         binding.viewModel = registerItemViewModel
+
+        setImageRecyclerView()
+
         setPictureListener()
         setDateListener(etRegisterItemStartDate)
         setDateListener(etRegisterItemEndDate)
         setTimeListener(etRegisterItemStartTime)
         setTimeListener(etRegisterItemEndTime)
         handleRegisterItemSideEffect()
+
         root
+    }
+
+    private fun setImageRecyclerView() {
+        registerImageAdapter = RegisterImageAdapter(mutableListOf())
+        binding.rvImages.adapter = registerImageAdapter
     }
 
     private fun setPictureListener() = with(binding) {
         val launcher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 val files = result.data?.clipData
-
+                binding.rvImages.visibility = View.VISIBLE
                 files?.run {
                     repeat(this.itemCount) { index ->
+                        val uri = getItemAt(index).uri
                         registerItemViewModel.addUri(
                             context = requireContext(),
-                            uri = this.getItemAt(index).uri,
+                            uri = uri,
                         )
+                        registerImageAdapter.addImage(uri)
+                        registerImageAdapter.notifyItemInserted(registerImageAdapter.itemCount - 1)
                     }
                 }
             }
+
         cardViewRegisterItem.setOnClickListener {
             Intent(Intent.ACTION_GET_CONTENT).run {
                 setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
@@ -118,7 +134,6 @@ class RegisterItemFragment : Fragment() {
                 is RegisterItemSideEffect.Failure -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
-
             }
         }
     }
