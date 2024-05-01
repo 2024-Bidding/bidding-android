@@ -36,6 +36,10 @@ internal class RegisterItemViewModel(
         endTime: String,
         imageUrls: List<String>
     ) {
+        if (name.isBlank() || endPrice.isBlank() || startPrice.isBlank() || startDate.isBlank() || endDate.isBlank() || startTime.isBlank() || endTime.isBlank()) {
+            postSideEffect(RegisterItemSideEffect.Failure(message = "모든 값을 입력해주세요"))
+            return
+        }
         if (imageUrls.isEmpty()) {
             postSideEffect(RegisterItemSideEffect.Failure(message = "이미지를 첨부해주세요"))
         } else {
@@ -58,6 +62,7 @@ internal class RegisterItemViewModel(
                 ).onSuccess {
                     postSideEffect(RegisterItemSideEffect.Success)
                 }.onFailure {
+                    Log.d("TEST", it.toString())
                     postSideEffect(RegisterItemSideEffect.Failure(it.toString()))
                 }
             }
@@ -126,7 +131,7 @@ internal class RegisterItemViewModel(
     ): String = date.split(".").run {
         val year = get(0)
         val month = get(1).padStart(2, '0')
-        val day = get(2)
+        val day = get(2).padStart(2, '0')
 
         val hour = time.split(":")[0].padStart(2, '0')
         val minute = time.split(":")[1].padStart(2, '0')
