@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/items">
+    app:startDestination="@id/splash">
 
     <fragment
         android:id="@+id/splash"
@@ -48,6 +48,16 @@
         android:id="@+id/items"
         android:name="com.seunghoon.bidding_android.feature.items.ItemsFragment"
         android:label="Items"
-        tools:layout="@layout/fragment_items" />
+        tools:layout="@layout/fragment_items">
+        <action
+            android:id="@+id/navigate_to_register_item"
+            app:destination="@+id/register_item" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/register_item"
+        android:name="com.seunghoon.bidding_android.feature.registeritem.RegisterItemFragment"
+        android:label="RegisterItem"
+        tools:layout="@layout/fragment_register_item" />
 
 </navigation>

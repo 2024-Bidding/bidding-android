@@ -14,3 +14,7 @@ internal fun NavController.navigateToSignUp() {
 internal fun NavController.navigateToItems() {
     navigate(R.id.navigate_to_items)
 }
+
+internal fun NavController.navigateToRegisterItem() {
+    navigate(R.id.navigate_to_register_item)
+}

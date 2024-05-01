@@ -1,4 +1,4 @@
-package com.seunghoon.bidding_android.data.model
+package com.seunghoon.bidding_android.data.model.item.response
 
 import com.seunghoon.bidding_android.data.enums.BiddingStatus
 import kotlinx.serialization.SerialName

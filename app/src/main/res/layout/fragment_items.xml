@@ -47,5 +47,15 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_register_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="32dp"
+            android:src="@drawable/ic_add"
+            android:tint="?attr/colorPrimaryContainer"
+            app:maxImageSize="36dp" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

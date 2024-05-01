@@ -1,7 +1,7 @@
 package com.seunghoon.bidding_android.domain.entity.items
 
 import com.seunghoon.bidding_android.data.enums.BiddingStatus
-import com.seunghoon.bidding_android.data.model.ItemsResponse
+import com.seunghoon.bidding_android.data.model.item.response.ItemsResponse
 import java.text.DecimalFormat
 
 data class ItemsEntity(
