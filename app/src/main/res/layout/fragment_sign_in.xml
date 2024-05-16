@@ -4,7 +4,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/img_sign_in_app_logo"
@@ -38,18 +39,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            app:passwordToggleEnabled="true"
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="@id/til_sign_in_email"
             app:layout_constraintStart_toStartOf="@id/til_sign_in_email"
-            app:layout_constraintTop_toBottomOf="@id/til_sign_in_email">
+            app:layout_constraintTop_toBottomOf="@id/til_sign_in_email"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_sign_in_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textPassword"
-                android:hint="@string/password" />
+                android:hint="@string/password"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
