@@ -5,6 +5,7 @@ import com.seunghoon.bidding_android.data.api.FileApi
 import com.seunghoon.bidding_android.data.api.ItemApi
 import com.seunghoon.bidding_android.data.api.UserApi
 import com.seunghoon.bidding_android.data.util.LocalStorage
+import com.seunghoon.bidding_android.feature.details.ItemDetailsViewModel
 import com.seunghoon.bidding_android.feature.items.ItemsViewModel
 import com.seunghoon.bidding_android.feature.registeritem.CreateItemViewModel
 import com.seunghoon.bidding_android.feature.signin.SignInViewModel
@@ -36,6 +37,9 @@ class BiddingApplication : Application() {
                 itemApi = get(),
                 fileApi = get(),
             )
+        }
+        viewModel {
+            ItemDetailsViewModel(itemApi = get())
         }
     }
 

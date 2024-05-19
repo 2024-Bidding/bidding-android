@@ -2,6 +2,7 @@ package com.seunghoon.bidding_android.data.api
 
 import com.seunghoon.bidding_android.data.di.ktorClient
 import com.seunghoon.bidding_android.data.model.item.request.CreateItemRequest
+import com.seunghoon.bidding_android.data.model.item.response.ItemDetailsResponse
 import com.seunghoon.bidding_android.data.model.item.response.ItemsResponse
 import com.seunghoon.bidding_android.data.util.LocalStorage
 import com.seunghoon.bidding_android.data.util.RequestHandler
@@ -34,6 +35,14 @@ internal class ItemApi(
                     value = localStorage.getValue(LocalStorage.ACCESS_TOKEN),
                 )
             }
+        }
+    }
+
+    suspend fun fetchItemDetails(itemId: Long) = runCatching {
+        RequestHandler<ItemDetailsResponse>().request {
+            ktorClient.get {
+                url("${RequestUrl.Items.path}/${itemId}")
+            }.body<ItemDetailsResponse>()
         }
     }
 }

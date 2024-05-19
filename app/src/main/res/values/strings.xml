@@ -31,4 +31,5 @@
     <!--Item Details-->
     <string name="item_details">물품 상세보기</string>
     <string name="item_details_do_bid">입찰하기</string>
+    <string name="item_details_current_price">%s원</string>
 </resources>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="details"
+            type="com.seunghoon.bidding_android.data.model.item.response.ItemDetailsResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_item_details"
+            style="@style/Widget.Material3.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/item_details"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_item_details_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#646464"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_item_details" />
+
+        <TextView
+            android:id="@+id/tv_item_details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:text="@{details.name}"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vp_item_details_image" />
+
+        <TextView
+            android:id="@+id/tv_item_details_writer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{details.userName}"
+            android:textColor="?attr/colorOutline"
+            app:layout_constraintStart_toStartOf="@id/tv_item_details_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_details_title" />
+
+        <TextView
+            android:id="@+id/tv_item_details_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{details.startTime.replace('T', ' ')}"
+            android:textColor="?attr/colorOutline"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_details_writer"
+            app:layout_constraintStart_toEndOf="@id/tv_item_details_writer"
+            app:layout_constraintTop_toTopOf="@id/tv_item_details_writer" />
+
+        <TextView
+            android:id="@+id/tv_item_details_wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="~"
+            android:textColor="?attr/colorOutline"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_details_start_time"
+            app:layout_constraintStart_toEndOf="@id/tv_item_details_start_time"
+            app:layout_constraintTop_toTopOf="@id/tv_item_details_start_time" />
+
+        <TextView
+            android:id="@+id/tv_item_details_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{details.endTime.replace('T', ' ')}"
+            android:textColor="?attr/colorOutline"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_details_wave"
+            app:layout_constraintStart_toEndOf="@id/tv_item_details_wave"
+            app:layout_constraintTop_toTopOf="@id/tv_item_details_wave" />
+
+        <TextView
+            android:id="@+id/tv_item_details_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="18dp"
+            android:text="@{details.content}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_details_writer" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_item_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/linear_item_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linear_item_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_item_details_bidding_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="입찰 진행 중"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_item_details_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="2dp"
+                android:textSize="22sp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/item_details_do_bid" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
