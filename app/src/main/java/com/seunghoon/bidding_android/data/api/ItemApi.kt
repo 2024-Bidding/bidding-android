@@ -1,7 +1,7 @@
 package com.seunghoon.bidding_android.data.api
 
 import com.seunghoon.bidding_android.data.di.ktorClient
-import com.seunghoon.bidding_android.data.model.item.request.RegisterItemRequest
+import com.seunghoon.bidding_android.data.model.item.request.CreateItemRequest
 import com.seunghoon.bidding_android.data.model.item.response.ItemsResponse
 import com.seunghoon.bidding_android.data.util.LocalStorage
 import com.seunghoon.bidding_android.data.util.RequestHandler
@@ -24,11 +24,11 @@ internal class ItemApi(
         }
     }
 
-    suspend fun registerItem(registerItemRequest: RegisterItemRequest) = runCatching {
+    suspend fun createItem(createItemRequest: CreateItemRequest) = runCatching {
         RequestHandler<Unit>().request {
             ktorClient.post {
                 url(RequestUrl.Items.path)
-                setBody(registerItemRequest)
+                setBody(createItemRequest)
                 header(
                     key = "Authorization",
                     value = localStorage.getValue(LocalStorage.ACCESS_TOKEN),

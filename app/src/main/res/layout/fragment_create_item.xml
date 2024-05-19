@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.seunghoon.bidding_android.feature.registeritem.RegisterItemViewModel" />
+            type="com.seunghoon.bidding_android.feature.registeritem.CreateItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

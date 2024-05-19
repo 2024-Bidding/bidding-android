@@ -7,8 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.seunghoon.bidding_android.data.api.FileApi
 import com.seunghoon.bidding_android.data.api.ItemApi
 import com.seunghoon.bidding_android.data.model.file.request.CreatePresignedUrlRequest
-import com.seunghoon.bidding_android.data.model.item.request.RegisterItemRequest
+import com.seunghoon.bidding_android.data.model.item.request.CreateItemRequest
 import com.seunghoon.bidding_android.data.util.FileUtil
+import com.seunghoon.bidding_android.data.util.Unauthorized
 import com.seunghoon.bidding_android.feature.base.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,7 @@ import java.io.File
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-internal class RegisterItemViewModel(
+internal class CreateItemViewModel(
     private val itemApi: ItemApi,
     private val fileApi: FileApi,
 ) : BaseViewModel<RegisterItemState, RegisterItemSideEffect>(RegisterItemState.getDefaultState()) {
@@ -26,7 +27,7 @@ internal class RegisterItemViewModel(
     private val uris: MutableList<Uri> = mutableListOf()
     private val files: MutableList<File> = mutableListOf()
 
-    fun registerItem(
+    fun createItem(
         name: String,
         endPrice: String,
         startPrice: String,
@@ -40,8 +41,8 @@ internal class RegisterItemViewModel(
             postSideEffect(RegisterItemSideEffect.Failure(message = "이미지를 첨부해주세요"))
         } else {
             viewModelScope.launch(Dispatchers.IO) {
-                itemApi.registerItem(
-                    registerItemRequest = RegisterItemRequest(
+                itemApi.createItem(
+                    createItemRequest = CreateItemRequest(
                         name = name,
                         endPrice = endPrice.toLong(),
                         startPrice = startPrice.toLong(),
@@ -58,7 +59,15 @@ internal class RegisterItemViewModel(
                 ).onSuccess {
                     postSideEffect(RegisterItemSideEffect.Success)
                 }.onFailure {
-                    postSideEffect(RegisterItemSideEffect.Failure(it.toString()))
+                    when (it) {
+                        is Unauthorized -> {
+                            postSideEffect(RegisterItemSideEffect.Failure("토큰이 만료되었어요"))
+                        }
+
+                        else -> {
+                            Log.d("TEST", it.toString())
+                        }
+                    }
                 }
             }
         }

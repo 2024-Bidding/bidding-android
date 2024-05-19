@@ -14,15 +14,15 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.seunghoon.bidding_android.databinding.FragmentRegisterItemBinding
+import com.seunghoon.bidding_android.databinding.FragmentCreateItemBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDateTime
 
-class RegisterItemFragment : Fragment() {
+class CreateItemFragment : Fragment() {
 
-    private lateinit var binding: FragmentRegisterItemBinding
+    private lateinit var binding: FragmentCreateItemBinding
 
-    private val registerItemViewModel: RegisterItemViewModel by viewModel()
+    private val createItemViewModel: CreateItemViewModel by viewModel()
 
     private val navController by lazy {
         findNavController()
@@ -34,9 +34,9 @@ class RegisterItemFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = with(FragmentRegisterItemBinding.inflate(inflater)) {
+    ) = with(FragmentCreateItemBinding.inflate(inflater)) {
         binding = this
-        binding.viewModel = registerItemViewModel
+        binding.viewModel = createItemViewModel
 
         setImageRecyclerView()
 
@@ -63,7 +63,7 @@ class RegisterItemFragment : Fragment() {
                 files?.run {
                     repeat(this.itemCount) { index ->
                         val uri = getItemAt(index).uri
-                        registerItemViewModel.addUri(
+                        createItemViewModel.addUri(
                             context = requireContext(),
                             uri = uri,
                         )
@@ -108,11 +108,11 @@ class RegisterItemFragment : Fragment() {
     }
 
     private fun handleRegisterItemSideEffect() {
-        registerItemViewModel.collectSideEffect {
+        createItemViewModel.collectSideEffect {
             when (it) {
                 is RegisterItemSideEffect.SuccessCreatePresignedUrl -> {
                     with(binding) {
-                        registerItemViewModel.registerItem(
+                        createItemViewModel.createItem(
                             name = etRegisterItemTitle.text.toString(),
                             endPrice = etRegisterItemEndPrice.text.toString(),
                             startPrice = etRegisterItemStartPrice.text.toString(),
@@ -122,7 +122,7 @@ class RegisterItemFragment : Fragment() {
                             startDate = etRegisterItemStartDate.text.toString(),
                             endDate = etRegisterItemEndDate.text.toString(),
                         )
-                        registerItemViewModel.uploadFile(presignedUrls = it.presignedUrls)
+                        createItemViewModel.uploadFile(presignedUrls = it.presignedUrls)
                     }
                 }
 

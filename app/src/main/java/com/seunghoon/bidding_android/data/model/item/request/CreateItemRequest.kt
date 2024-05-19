@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterItemRequest(
+data class CreateItemRequest(
     @SerialName("name") val name: String,
     @SerialName("end_price") val endPrice: Long,
     @SerialName("start_price") val startPrice: Long,

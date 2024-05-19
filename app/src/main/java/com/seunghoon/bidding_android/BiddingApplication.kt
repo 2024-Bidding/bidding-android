@@ -6,7 +6,7 @@ import com.seunghoon.bidding_android.data.api.ItemApi
 import com.seunghoon.bidding_android.data.api.UserApi
 import com.seunghoon.bidding_android.data.util.LocalStorage
 import com.seunghoon.bidding_android.feature.items.ItemsViewModel
-import com.seunghoon.bidding_android.feature.registeritem.RegisterItemViewModel
+import com.seunghoon.bidding_android.feature.registeritem.CreateItemViewModel
 import com.seunghoon.bidding_android.feature.signin.SignInViewModel
 import com.seunghoon.bidding_android.feature.signup.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,7 +32,7 @@ class BiddingApplication : Application() {
         viewModel { SignUpViewModel(userApi = get()) }
         viewModel { ItemsViewModel(itemApi = get()) }
         viewModel {
-            RegisterItemViewModel(
+            CreateItemViewModel(
                 itemApi = get(),
                 fileApi = get(),
             )
