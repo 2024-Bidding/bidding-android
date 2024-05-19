@@ -39,7 +39,7 @@ class CreateItemFragment : Fragment() {
         binding.viewModel = createItemViewModel
 
         setImageRecyclerView()
-
+        setToolbarEvent()
         setPictureListener()
         setDateListener(etRegisterItemStartDate)
         setDateListener(etRegisterItemEndDate)
@@ -48,6 +48,12 @@ class CreateItemFragment : Fragment() {
         handleRegisterItemSideEffect()
 
         root
+    }
+
+    private fun setToolbarEvent() {
+        binding.toolbarRegisterItem.setNavigationOnClickListener {
+            navController.popBackStack()
+        }
     }
 
     private fun setImageRecyclerView() {

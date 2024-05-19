@@ -49,33 +49,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{item.currentPrice}"
-            android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_item_name"
             app:layout_constraintTop_toBottomOf="@id/tv_item_name" />
-
-        <TextView
-            android:id="@+id/tv_item_start_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="4dp"
-            android:text="@{item.startTime}"
-            android:textColor="?attr/colorOutline"
-            app:layout_constraintBottom_toBottomOf="@id/cv_item_img"
-            app:layout_constraintStart_toStartOf="@id/tv_item_price" />
 
         <TextView
             android:id="@+id/tv_item_end_date"
             style="@style/TextAppearance.Material3.BodyMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:text="@{item.endTime}"
             android:textColor="?attr/colorOutline"
-            app:layout_constraintBottom_toBottomOf="@id/tv_item_start_date"
-            app:layout_constraintStart_toEndOf="@id/tv_item_start_date"
-            app:layout_constraintTop_toTopOf="@id/tv_item_start_date" />
+            app:layout_constraintTop_toBottomOf="@id/tv_item_price"
+            app:layout_constraintStart_toStartOf="@id/tv_item_price" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider_item_bottom"
