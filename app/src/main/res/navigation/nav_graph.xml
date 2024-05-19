@@ -50,7 +50,7 @@
         android:label="Items"
         tools:layout="@layout/fragment_items">
         <action
-            android:id="@+id/navigate_to_register_item"
+            android:id="@+id/navigate_to_create_item"
             app:destination="@+id/create_item" />
 
         <action
@@ -68,6 +68,13 @@
         android:id="@+id/item_details"
         android:name="com.seunghoon.bidding_android.feature.details.ItemDetailsFragment"
         android:label="ItemDetails"
-        tools:layout="@layout/fragment_item_details" />
+        tools:layout="@layout/fragment_item_details">
+
+        <argument
+            android:name="item_id"
+            android:defaultValue="0L"
+            app:argType="long" />
+
+    </fragment>
 
 </navigation>

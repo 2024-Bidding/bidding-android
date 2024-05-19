@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seunghoon.bidding_android.databinding.FragmentItemsBinding
-import com.seunghoon.bidding_android.navigation.navigateToRegisterItem
+import com.seunghoon.bidding_android.navigation.navigateToCreateItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class ItemsFragment : Fragment() {
@@ -33,7 +33,10 @@ internal class ItemsFragment : Fragment() {
         initView()
         collectItemsSideEffect()
 
-        itemsAdapter = ItemsAdapter(mutableListOf())
+        itemsAdapter = ItemsAdapter(
+            items = mutableListOf(),
+            navController = navController,
+        )
 
         return binding.root
     }
@@ -53,7 +56,7 @@ internal class ItemsFragment : Fragment() {
     private fun initView() = with(binding) {
         rvItems.layoutManager = LinearLayoutManager(context)
         fabRegisterItem.setOnClickListener {
-            navController.navigateToRegisterItem()
+            navController.navigateToCreateItem()
         }
     }
 

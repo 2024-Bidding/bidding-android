@@ -2,13 +2,16 @@ package com.seunghoon.bidding_android.feature.items
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.seunghoon.bidding_android.databinding.ItemBinding
 import com.seunghoon.bidding_android.domain.entity.items.ItemsEntity
+import com.seunghoon.bidding_android.navigation.navigateToItemDetails
 
 internal class ItemsAdapter(
-    private val items: MutableList<ItemsEntity.ItemEntity>
+    private val items: MutableList<ItemsEntity.ItemEntity>,
+    private val navController: NavController,
 ) : RecyclerView.Adapter<ItemsAdapter.ItemsViewHolder>() {
     class ItemsViewHolder(val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -30,6 +33,9 @@ internal class ItemsAdapter(
             Glide.with(holder.itemView.context)
                 .load("https://jobis-store.s3.ap-northeast-2.amazonaws.com/" + items[position].imageUrl)
                 .into(imgItem)
+        }
+        holder.itemView.setOnClickListener {
+            navController.navigateToItemDetails(itemId = items[position].id)
         }
     }
 
