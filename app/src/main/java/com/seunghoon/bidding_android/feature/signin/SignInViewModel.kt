@@ -3,6 +3,7 @@ package com.seunghoon.bidding_android.feature.signin
 import androidx.lifecycle.viewModelScope
 import com.seunghoon.bidding_android.data.api.UserApi
 import com.seunghoon.bidding_android.data.model.user.request.SignInRequest
+import com.seunghoon.bidding_android.data.util.LocalStorage
 import com.seunghoon.bidding_android.data.util.NotFound
 import com.seunghoon.bidding_android.data.util.Unauthorized
 import com.seunghoon.bidding_android.feature.base.BaseViewModel
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 
 internal class SignInViewModel(
     private val userApi: UserApi,
+    private val localStorage: LocalStorage,
 ) : BaseViewModel<Unit, SignInSideEffect>(Unit) {
 
     fun signIn(
@@ -26,6 +28,10 @@ internal class SignInViewModel(
                     )
                 )
             }.onSuccess {
+                localStorage.putValue(
+                    key = LocalStorage.ACCESS_TOKEN,
+                    value = "Bearer ${it.accessToken}",
+                )
                 postSideEffect(SignInSideEffect.Success("성공적으로 로그인되었습니다."))
             }.onFailure {
                 when (it) {
