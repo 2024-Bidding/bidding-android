@@ -8,6 +8,7 @@ internal class RequestHandler<T> {
             block()
         } catch (e: ClientRequestException) {
             when (e.response.status.value) {
+                400 -> throw BadRequest
                 401 -> throw Unauthorized
                 404 -> throw NotFound
                 else -> throw e

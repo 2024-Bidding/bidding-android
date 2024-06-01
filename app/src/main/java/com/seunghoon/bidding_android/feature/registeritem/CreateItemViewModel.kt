@@ -2,18 +2,17 @@ package com.seunghoon.bidding_android.feature.registeritem
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.seunghoon.bidding_android.data.api.FileApi
 import com.seunghoon.bidding_android.data.api.ItemApi
 import com.seunghoon.bidding_android.data.model.file.request.CreatePresignedUrlRequest
 import com.seunghoon.bidding_android.data.model.item.request.CreateItemRequest
+import com.seunghoon.bidding_android.data.util.BadRequest
 import com.seunghoon.bidding_android.data.util.FileUtil
 import com.seunghoon.bidding_android.data.util.Unauthorized
 import com.seunghoon.bidding_android.feature.base.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.io.File
 import java.time.LocalDate
@@ -35,7 +34,8 @@ internal class CreateItemViewModel(
         endDate: String,
         startTime: String,
         endTime: String,
-        imageUrls: List<String>
+        imageUrls: List<String>,
+        content: String,
     ) {
         if (imageUrls.isEmpty()) {
             postSideEffect(RegisterItemSideEffect.Failure(message = "이미지를 첨부해주세요"))
@@ -55,6 +55,7 @@ internal class CreateItemViewModel(
                             date = endDate,
                             time = endTime,
                         ),
+                        content = content,
                     )
                 ).onSuccess {
                     postSideEffect(RegisterItemSideEffect.Success)
@@ -64,8 +65,12 @@ internal class CreateItemViewModel(
                             postSideEffect(RegisterItemSideEffect.Failure("토큰이 만료되었어요"))
                         }
 
+                        is BadRequest -> {
+                            postSideEffect(RegisterItemSideEffect.Failure("잘못된 형식의 요청이에요"))
+                        }
+
                         else -> {
-                            Log.d("TEST", it.toString())
+                            postSideEffect(RegisterItemSideEffect.Failure(it.message.toString()))
                         }
                     }
                 }
@@ -102,10 +107,8 @@ internal class CreateItemViewModel(
                 fileApi.uploadFile(
                     presignedUrl = s,
                     file = files[index],
-                ).onSuccess {
-                    cancel()
-                }.onFailure {
-                    Log.d("TEST", it.toString())
+                ).onFailure {
+                    postSideEffect(RegisterItemSideEffect.Failure(message = "파일 업로드 중 문제가 발생했습니다"))
                 }
             }
         }
@@ -135,7 +138,7 @@ internal class CreateItemViewModel(
     ): String = date.split(".").run {
         val year = get(0)
         val month = get(1).padStart(2, '0')
-        val day = get(2)
+        val day = get(2).padStart(2, '0')
 
         val hour = time.split(":")[0].padStart(2, '0')
         val minute = time.split(":")[1].padStart(2, '0')
