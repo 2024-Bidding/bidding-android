@@ -27,6 +27,7 @@
     <string name="start_time">시작 시간</string>
     <string name="end_time">종료 시간</string>
     <string name="do_register">등록하기</string>
+    <string name="description">설명</string>
 
     <!--Item Details-->
     <string name="item_details">물품 상세보기</string>

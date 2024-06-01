@@ -30,9 +30,9 @@
             android:id="@+id/hr_sv_images"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
             android:layout_marginStart="20dp"
             android:layout_marginTop="48dp"
+            android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_register_item">
 
@@ -205,6 +205,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_tl_register_item_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -255,8 +256,24 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
         </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tl_register_item_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/description"
+            app:layout_constraintEnd_toEndOf="@id/linear_tl_register_item_time"
+            app:layout_constraintStart_toStartOf="@id/linear_tl_register_item_time"
+            app:layout_constraintTop_toBottomOf="@id/linear_tl_register_item_time">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_register_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_register_item_register"
