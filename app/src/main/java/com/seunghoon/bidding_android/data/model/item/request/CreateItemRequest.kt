@@ -8,7 +8,8 @@ data class CreateItemRequest(
     @SerialName("name") val name: String,
     @SerialName("end_price") val endPrice: Long,
     @SerialName("start_price") val startPrice: Long,
-    @SerialName("image_url") val imageUrls: List<String>,
+    @SerialName("image_urls") val imageUrls: List<String>,
     @SerialName("start_time") val startTime: String,
     @SerialName("end_time") val endTime: String,
+    @SerialName("content") val content: String,
 )
