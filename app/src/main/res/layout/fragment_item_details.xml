@@ -26,15 +26,46 @@
             app:title="@string/item_details"
             app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_item_details_image"
+        <FrameLayout
+            android:id="@+id/frame_item_details_images"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#646464"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_item_details" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_item_details">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_item_details_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_item_details" />
+
+            <LinearLayout
+                android:id="@+id/linear_item_details_pager_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/radius_8"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp">
+
+                <TextView
+                    android:id="@+id/tv_item_details_pager_counter_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-/-"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/tv_item_details_title"
@@ -45,7 +76,7 @@
             android:text="@{details.name}"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vp_item_details_image" />
+            app:layout_constraintTop_toBottomOf="@id/frame_item_details_images" />
 
         <TextView
             android:id="@+id/tv_item_details_writer"

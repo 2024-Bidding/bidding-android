@@ -28,6 +28,7 @@ internal class ItemImageAdapter(val images: List<String>) :
             .into(imageView)
     }
 
+
     override fun getItemCount(): Int {
         return images.size
     }

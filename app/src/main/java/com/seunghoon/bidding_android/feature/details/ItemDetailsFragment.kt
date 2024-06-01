@@ -1,18 +1,20 @@
 package com.seunghoon.bidding_android.feature.details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.seunghoon.bidding_android.R
 import com.seunghoon.bidding_android.databinding.FragmentItemDetailsBinding
 import com.seunghoon.bidding_android.navigation.NavArguments
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@SuppressLint("SetTextI18n")
 class ItemDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentItemDetailsBinding
@@ -62,7 +64,8 @@ class ItemDetailsFragment : Fragment() {
                         it.details.currentPrice.toString()
                     )
                     setViewPager(it.details.imageUrls)
-                    Log.d("TEST", it.details.imageUrls.toList().toString())
+                    binding.tvItemDetailsPagerCounterText.text = "1/${it.details.imageUrls.size}"
+                    onSwipedImageAdapter()
                 }
 
                 is ItemDetailsSideEffect.Failure -> {
@@ -70,5 +73,21 @@ class ItemDetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun onSwipedImageAdapter() {
+        binding.vpItemDetailsImage.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                binding.tvItemDetailsPagerCounterText.let {
+                    val max = it.text.split("/")[1]
+                    it.text = "${position + 1}/$max"
+                }
+            }
+        })
     }
 }
