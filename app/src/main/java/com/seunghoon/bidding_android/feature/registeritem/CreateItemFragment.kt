@@ -127,7 +127,7 @@ class CreateItemFragment : Fragment() {
                             imageUrls = it.filePath,
                             startDate = etRegisterItemStartDate.text.toString(),
                             endDate = etRegisterItemEndDate.text.toString(),
-                            content = etRegisterItemContent.text.toString(),
+                            content = etRegisterItemDescription.text.toString(),
                         )
                         createItemViewModel.uploadFile(presignedUrls = it.presignedUrls)
                     }

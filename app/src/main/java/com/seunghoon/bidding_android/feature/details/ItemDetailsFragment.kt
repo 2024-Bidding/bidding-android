@@ -1,6 +1,7 @@
 package com.seunghoon.bidding_android.feature.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,10 @@ class ItemDetailsFragment : Fragment() {
         return binding.root
     }
 
+    private fun setViewPager(images: List<String>) {
+        binding.vpItemDetailsImage.adapter = ItemImageAdapter(images = images)
+    }
+
     private fun setToolbarListener() {
         binding.toolbarItemDetails.setNavigationOnClickListener {
             navController.popBackStack()
@@ -52,7 +57,12 @@ class ItemDetailsFragment : Fragment() {
             when (it) {
                 is ItemDetailsSideEffect.Success -> {
                     binding.details = it.details
-                    binding.tvItemDetailsPrice.text = getString(R.string.item_details_current_price, it.details.currentPrice.toString())
+                    binding.tvItemDetailsPrice.text = getString(
+                        R.string.item_details_current_price,
+                        it.details.currentPrice.toString()
+                    )
+                    setViewPager(it.details.imageUrls)
+                    Log.d("TEST", it.details.imageUrls.toList().toString())
                 }
 
                 is ItemDetailsSideEffect.Failure -> {
