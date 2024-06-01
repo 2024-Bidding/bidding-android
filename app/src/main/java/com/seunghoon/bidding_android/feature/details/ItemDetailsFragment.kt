@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.seunghoon.bidding_android.R
 import com.seunghoon.bidding_android.databinding.FragmentItemDetailsBinding
 import com.seunghoon.bidding_android.navigation.NavArguments
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.DecimalFormat
 
 @SuppressLint("SetTextI18n")
 class ItemDetailsFragment : Fragment() {
@@ -59,10 +59,8 @@ class ItemDetailsFragment : Fragment() {
             when (it) {
                 is ItemDetailsSideEffect.Success -> {
                     binding.details = it.details
-                    binding.tvItemDetailsPrice.text = getString(
-                        R.string.item_details_current_price,
-                        it.details.currentPrice.toString()
-                    )
+                    binding.tvItemDetailsPrice.text =
+                        "${DecimalFormat("#,###").format(it.details.currentPrice)}원"
                     setViewPager(it.details.imageUrls)
                     binding.tvItemDetailsPagerCounterText.text = "1/${it.details.imageUrls.size}"
                     onSwipedImageAdapter()
