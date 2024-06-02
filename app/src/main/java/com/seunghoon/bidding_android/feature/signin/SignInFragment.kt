@@ -14,7 +14,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class SignInFragment : Fragment() {
 
-    private lateinit var binding: FragmentSignInBinding
+    private val binding: FragmentSignInBinding by lazy {
+        FragmentSignInBinding.inflate(layoutInflater)
+    }
 
     private val signInViewModel: SignInViewModel by viewModel()
 
@@ -27,12 +29,16 @@ internal class SignInFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSignInBinding.inflate(inflater)
         collectSignInSideEffect()
         setDoSignUpTextEvent()
         setSignInButtonEvent()
 
         return binding.root
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        binding.unbind()
     }
 
     private fun collectSignInSideEffect() {
@@ -55,7 +61,6 @@ internal class SignInFragment : Fragment() {
     }
 
     private fun setDoSignUpTextEvent() = with(binding) {
-        val navController = findNavController()
         tvSignInDoSignUp.setOnClickListener {
             navController.navigateToSignUp()
         }

@@ -2,38 +2,32 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <FrameLayout
-                android:id="@+id/frame_root"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/container_root"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_height="match_parent"
+                app:navGraph="@navigation/nav_graph_root" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bnv_root"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                app:itemIconSize="28dp"
-                app:itemIconTint="@drawable/selector_bottom_navigation"
-                app:menu="@menu/menu_navigations" />
+        </FrameLayout>
 
-        </LinearLayout>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/container_root"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv_root"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-        </androidx.fragment.app.FragmentContainerView>
-    </FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:itemIconSize="28dp"
+            app:itemIconTint="@drawable/selector_bottom_navigation"
+            app:menu="@menu/menu_navigation" />
+    </LinearLayout>
 </layout>

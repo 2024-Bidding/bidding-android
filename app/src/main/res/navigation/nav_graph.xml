@@ -61,12 +61,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/items"
-        android:name="com.seunghoon.bidding_android.feature.items.ItemsFragment"
-        android:label="Items"
-        tools:layout="@layout/fragment_items" />
-
-    <fragment
         android:id="@+id/create_item"
         android:name="com.seunghoon.bidding_android.feature.registeritem.CreateItemFragment"
         android:label="RegisterItem"
