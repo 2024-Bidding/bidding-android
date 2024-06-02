@@ -21,7 +21,17 @@
         android:id="@+id/root"
         android:name="com.seunghoon.bidding_android.feature.base.RootFragment"
         android:label="Root"
-        tools:layout="@layout/fragment_root" />
+        tools:layout="@layout/fragment_root">
+
+        <action
+            android:id="@+id/navigate_to_create_item"
+            app:destination="@+id/create_item" />
+
+        <action
+            android:id="@+id/navigate_to_item_details"
+            app:destination="@+id/item_details" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/sign_in"
@@ -54,15 +64,7 @@
         android:id="@+id/items"
         android:name="com.seunghoon.bidding_android.feature.items.ItemsFragment"
         android:label="Items"
-        tools:layout="@layout/fragment_items">
-        <action
-            android:id="@+id/navigate_to_create_item"
-            app:destination="@+id/create_item" />
-
-        <action
-            android:id="@+id/navigate_to_item_details"
-            app:destination="@+id/item_details" />
-    </fragment>
+        tools:layout="@layout/fragment_items" />
 
     <fragment
         android:id="@+id/create_item"
