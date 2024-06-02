@@ -16,8 +16,8 @@ internal fun NavController.navigateToSignUp() {
     navigate(R.id.navigate_to_sign_up)
 }
 
-internal fun NavController.navigateToItems() {
-    navigate(R.id.navigate_to_items)
+internal fun NavController.navigateToRoot() {
+    navigate(R.id.navigate_to_root)
 }
 
 internal fun NavController.navigateToCreateItem() {

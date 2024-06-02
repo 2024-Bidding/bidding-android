@@ -18,6 +18,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/root"
+        android:name="com.seunghoon.bidding_android.feature.base.RootFragment"
+        android:label="Root"
+        tools:layout="@layout/fragment_root" />
+
+    <fragment
         android:id="@+id/sign_in"
         android:name="com.seunghoon.bidding_android.feature.signin.SignInFragment"
         android:label="SignIn"
@@ -28,8 +34,8 @@
             app:popUpTo="@id/sign_in" />
 
         <action
-            android:id="@+id/navigate_to_items"
-            app:destination="@id/items"
+            android:id="@+id/navigate_to_root"
+            app:destination="@id/root"
             app:popUpTo="@id/sign_in" />
     </fragment>
 

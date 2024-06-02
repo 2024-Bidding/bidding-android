@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.seunghoon.bidding_android.databinding.FragmentSignInBinding
-import com.seunghoon.bidding_android.navigation.navigateToItems
+import com.seunghoon.bidding_android.navigation.navigateToRoot
 import com.seunghoon.bidding_android.navigation.navigateToSignUp
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,7 +40,7 @@ internal class SignInFragment : Fragment() {
             when (it) {
                 is SignInSideEffect.Success -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    navController.navigateToItems()
+                    navController.navigateToRoot()
                 }
 
                 is SignInSideEffect.InvalidPassword -> {
