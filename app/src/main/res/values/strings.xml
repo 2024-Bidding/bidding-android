@@ -33,4 +33,9 @@
     <string name="item_details">물품 상세보기</string>
     <string name="item_details_do_bid">입찰하기</string>
     <string name="item_details_current_price">%s원</string>
+
+    <!--Navigations-->
+    <string name="navigation_home">홈</string>
+    <string name="navigation_likes">좋아요</string>
+    <string name="navigation_my_page">마이페이지</string>
 </resources>
