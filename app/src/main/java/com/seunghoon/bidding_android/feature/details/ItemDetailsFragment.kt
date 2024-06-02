@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -37,9 +38,9 @@ class ItemDetailsFragment : Fragment() {
         binding = FragmentItemDetailsBinding.inflate(inflater)
         handleItemDetailsSideEffect()
         setToolbarListener()
+        setOnClickBidItemButton()
 
         viewModel.fetchItemDetails(itemId)
-
 
         return binding.root
     }
@@ -51,6 +52,14 @@ class ItemDetailsFragment : Fragment() {
     private fun setToolbarListener() {
         binding.toolbarItemDetails.setNavigationOnClickListener {
             navController.popBackStack()
+        }
+    }
+
+    private fun setOnClickBidItemButton() {
+        binding.btnItemDetailsBid.setOnClickListener {
+            val dialog = BidItemDialog(requireContext())
+            dialog.show()
+            dialog.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         }
     }
 

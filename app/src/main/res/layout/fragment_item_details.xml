@@ -172,6 +172,7 @@
                 android:layout_weight="1" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/btn_item_details_bid"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/item_details_do_bid" />
