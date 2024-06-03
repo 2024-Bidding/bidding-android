@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.seunghoon.bidding_android.R
+import com.seunghoon.bidding_android.common.showToast
 import com.seunghoon.bidding_android.databinding.FragmentItemDetailsBinding
 import com.seunghoon.bidding_android.navigation.NavArguments
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,27 +60,35 @@ class ItemDetailsFragment : Fragment() {
 
     private fun setOnClickBidItemButton() {
         binding.btnItemDetailsBid.setOnClickListener {
-            bidItemDialog = BidItemDialog(
-                context = requireContext(),
-                currentPrice = binding.details?.currentPrice ?: 0,
-                maxPrice = binding.details?.maxPrice ?: 0,
-                bidItemDialogListener = object : BidItemDialogListener {
-                    override fun onBidItemClick(price: Long) {
-                        viewModel.bidItem(
-                            itemId = itemId,
-                            price = price,
-                        )
+            binding.details?.run {
+                bidItemDialog = BidItemDialog(
+                    context = requireContext(),
+                    currentPrice = currentPrice,
+                    maxPrice = maxPrice,
+                    bidItemDialogListener = object : BidItemDialogListener {
+                        override fun onBidItemClick(price: Long) {
+                            viewModel.bidItem(
+                                itemId = itemId,
+                                price = price,
+                                maxPrice = maxPrice,
+                            )
+                        }
                     }
-                }
-            )
-            with(bidItemDialog) {
-                show()
-                window?.setLayout(
-                    LayoutParams.MATCH_PARENT,
-                    LayoutParams.WRAP_CONTENT,
                 )
+                with(bidItemDialog) {
+                    show()
+                    window?.setLayout(
+                        LayoutParams.MATCH_PARENT,
+                        LayoutParams.WRAP_CONTENT,
+                    )
+                }
             }
         }
+    }
+
+    private fun hideDialog() {
+        bidItemDialog.hide()
+        viewModel.fetchItemDetails(itemId = itemId)
     }
 
     private fun handleItemDetailsSideEffect() {
@@ -99,9 +108,14 @@ class ItemDetailsFragment : Fragment() {
                 }
 
                 is ItemDetailsSideEffect.BidSuccess -> {
-                    Toast.makeText(requireContext(), "성공적으로 입찰되었습니다", Toast.LENGTH_SHORT).show()
-                    viewModel.fetchItemDetails(itemId = itemId)
-                    bidItemDialog.hide()
+                    hideDialog()
+                    requireContext().showToast("성공적으로 입찰되었습니다")
+                }
+
+                is ItemDetailsSideEffect.BidSuccessful -> {
+                    hideDialog()
+                    requireContext().showToast("성공적으로 낙찰되었습니다!")
+                    navController.popBackStack()
                 }
 
                 is ItemDetailsSideEffect.Failure -> {
