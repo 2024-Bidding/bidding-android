@@ -30,6 +30,8 @@ class ItemDetailsFragment : Fragment() {
 
     private val viewModel: ItemDetailsViewModel by viewModel()
 
+    private lateinit var bidItemDialog: BidItemDialog
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,12 +59,20 @@ class ItemDetailsFragment : Fragment() {
 
     private fun setOnClickBidItemButton() {
         binding.btnItemDetailsBid.setOnClickListener {
-            with(
-                BidItemDialog(
-                    context = requireContext(),
-                    maxPrice = binding.details?.maxPrice ?: 0,
-                )
-            ) {
+            bidItemDialog = BidItemDialog(
+                context = requireContext(),
+                currentPrice = binding.details?.currentPrice ?: 0,
+                maxPrice = binding.details?.maxPrice ?: 0,
+                bidItemDialogListener = object : BidItemDialogListener {
+                    override fun onBidItemClick(price: Long) {
+                        viewModel.bidItem(
+                            itemId = itemId,
+                            price = price,
+                        )
+                    }
+                }
+            )
+            with(bidItemDialog) {
                 show()
                 window?.setLayout(
                     LayoutParams.MATCH_PARENT,
@@ -76,14 +86,22 @@ class ItemDetailsFragment : Fragment() {
         viewModel.collectSideEffect {
             when (it) {
                 is ItemDetailsSideEffect.Success -> {
-                    binding.details = it.details
-                    binding.tvItemDetailsPrice.text = getString(
-                        R.string.item_details_current_price,
-                        it.details.currentPrice.toString()
-                    )
+                    with(binding) {
+                        details = it.details
+                        tvItemDetailsPrice.text = getString(
+                            R.string.item_details_current_price,
+                            it.details.currentPrice.toString()
+                        )
+                        tvItemDetailsPagerCounterText.text = "1/${it.details.imageUrls.size}"
+                    }
                     setViewPager(it.details.imageUrls)
-                    binding.tvItemDetailsPagerCounterText.text = "1/${it.details.imageUrls.size}"
                     onSwipedImageAdapter()
+                }
+
+                is ItemDetailsSideEffect.BidSuccess -> {
+                    Toast.makeText(requireContext(), "성공적으로 입찰되었습니다", Toast.LENGTH_SHORT).show()
+                    viewModel.fetchItemDetails(itemId = itemId)
+                    bidItemDialog.hide()
                 }
 
                 is ItemDetailsSideEffect.Failure -> {
