@@ -57,9 +57,18 @@ class ItemDetailsFragment : Fragment() {
 
     private fun setOnClickBidItemButton() {
         binding.btnItemDetailsBid.setOnClickListener {
-            val dialog = BidItemDialog(requireContext())
-            dialog.show()
-            dialog.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            with(
+                BidItemDialog(
+                    context = requireContext(),
+                    maxPrice = binding.details?.maxPrice ?: 0,
+                )
+            ) {
+                show()
+                window?.setLayout(
+                    LayoutParams.MATCH_PARENT,
+                    LayoutParams.WRAP_CONTENT,
+                )
+            }
         }
     }
 

@@ -34,8 +34,12 @@
     <string name="item_details_do_bid">입찰하기</string>
     <string name="item_details_current_price">%s원</string>
 
-    <!--Navigations-->
+    <!--Navigation-->
     <string name="navigation_home">홈</string>
     <string name="navigation_likes">좋아요</string>
     <string name="navigation_my_page">마이페이지</string>
+
+    <!--Bid Item Dialog-->
+    <string name="bid_item_title">입찰하기</string>
+    <string name="bid_item_input_hint">가격을 입력해주세요</string>
 </resources>
