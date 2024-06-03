@@ -33,6 +33,10 @@ internal class ItemsAdapter(
             Glide.with(holder.itemView.context)
                 .load("https://jobis-store.s3.ap-northeast-2.amazonaws.com/" + items[position].imageUrl)
                 .into(imgItem)
+
+            Glide.with(holder.itemView.context)
+                .load("https://jobis-store.s3.ap-northeast-2.amazonaws.com/" + items[position].userProfileImageUrl)
+                .into(imgItemUserProfile)
         }
         holder.itemView.setOnClickListener {
             navController.navigateToItemDetails(itemId = items[position].id)
