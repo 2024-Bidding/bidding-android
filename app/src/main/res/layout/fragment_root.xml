@@ -2,32 +2,43 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/container_root"
-                android:name="androidx.navigation.fragment.NavHostFragment"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:navGraph="@navigation/nav_graph_root" />
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-        </FrameLayout>
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/container_root_bottom_navigation"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/nav_graph_root"/>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bnv_root"
+            </FrameLayout>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bnv_root"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:itemIconSize="28dp"
+                app:itemIconTint="@drawable/selector_bottom_navigation"
+                app:menu="@menu/menu_navigation" />
+        </LinearLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/container_root"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:itemIconSize="28dp"
-            app:itemIconTint="@drawable/selector_bottom_navigation"
-            app:menu="@menu/menu_navigation" />
-    </LinearLayout>
+            android:layout_height="match_parent" />
+    </FrameLayout>
 </layout>

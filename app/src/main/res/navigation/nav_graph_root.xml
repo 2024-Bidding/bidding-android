@@ -11,4 +11,10 @@
         android:label="Items"
         tools:layout="@layout/fragment_items" />
 
+    <fragment
+        android:id="@+id/my_page"
+        android:name="com.seunghoon.bidding_android.feature.mypage.MyPageFragment"
+        android:label="MyPage"
+        tools:layout="@layout/fragment_my_page" />
+
 </navigation>

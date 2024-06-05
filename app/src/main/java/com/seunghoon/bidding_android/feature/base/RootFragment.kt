@@ -5,33 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.seunghoon.bidding_android.R
 import com.seunghoon.bidding_android.databinding.FragmentRootBinding
 
 class RootFragment : Fragment() {
 
-    private lateinit var binding: FragmentRootBinding
+    private val binding: FragmentRootBinding by lazy {
+        FragmentRootBinding.inflate(layoutInflater)
+    }
+
+    private val navController by lazy {
+        childFragmentManager.findFragmentById(R.id.container_root_bottom_navigation)
+            ?.findNavController()!!
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRootBinding.inflate(inflater)
         setBottomNavigation()
         return binding.root
     }
 
     private fun setBottomNavigation() {
-        @Suppress("DEPRECATION")
-        binding.bnvRoot.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> {}
-                R.id.likes -> {}
-                R.id.my_page -> {}
-            }
-            return@setOnNavigationItemSelectedListener true
-        }
+        binding.bnvRoot.setupWithNavController(navController)
     }
 
     override fun onDestroy() {

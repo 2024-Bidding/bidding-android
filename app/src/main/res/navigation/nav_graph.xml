@@ -18,22 +18,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/root"
-        android:name="com.seunghoon.bidding_android.feature.base.RootFragment"
-        android:label="Root"
-        tools:layout="@layout/fragment_root">
-
-        <action
-            android:id="@+id/navigate_to_create_item"
-            app:destination="@+id/create_item" />
-
-        <action
-            android:id="@+id/navigate_to_item_details"
-            app:destination="@+id/item_details" />
-
-    </fragment>
-
-    <fragment
         android:id="@+id/sign_in"
         android:name="com.seunghoon.bidding_android.feature.signin.SignInFragment"
         android:label="SignIn"
@@ -61,12 +45,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/create_item"
-        android:name="com.seunghoon.bidding_android.feature.registeritem.CreateItemFragment"
-        android:label="RegisterItem"
-        tools:layout="@layout/fragment_create_item" />
-
-    <fragment
         android:id="@+id/item_details"
         android:name="com.seunghoon.bidding_android.feature.details.ItemDetailsFragment"
         android:label="ItemDetails"
@@ -76,6 +54,28 @@
             android:name="item_id"
             android:defaultValue="0L"
             app:argType="long" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/create_item"
+        android:name="com.seunghoon.bidding_android.feature.registeritem.CreateItemFragment"
+        android:label="RegisterItem"
+        tools:layout="@layout/fragment_create_item" />
+
+    <fragment
+        android:id="@+id/root"
+        android:name="com.seunghoon.bidding_android.feature.base.RootFragment"
+        android:label="Root"
+        tools:layout="@layout/fragment_root">
+
+        <action
+            android:id="@+id/navigate_to_create_item"
+            app:destination="@id/create_item" />
+
+        <action
+            android:id="@+id/navigate_to_item_details"
+            app:destination="@id/item_details" />
 
     </fragment>
 
