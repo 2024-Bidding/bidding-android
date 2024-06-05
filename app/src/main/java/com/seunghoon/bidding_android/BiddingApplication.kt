@@ -7,6 +7,7 @@ import com.seunghoon.bidding_android.data.api.UserApi
 import com.seunghoon.bidding_android.data.util.LocalStorage
 import com.seunghoon.bidding_android.feature.details.ItemDetailsViewModel
 import com.seunghoon.bidding_android.feature.items.ItemsViewModel
+import com.seunghoon.bidding_android.feature.mypage.MyPageViewModel
 import com.seunghoon.bidding_android.feature.registeritem.CreateItemViewModel
 import com.seunghoon.bidding_android.feature.signin.SignInViewModel
 import com.seunghoon.bidding_android.feature.signup.SignUpViewModel
@@ -17,7 +18,7 @@ import org.koin.dsl.module
 class BiddingApplication : Application() {
 
     private val apiModule = module {
-        single { UserApi() }
+        single { UserApi(localStorage = get()) }
         single { ItemApi(localStorage = get()) }
         single { FileApi() }
         single { LocalStorage(context = applicationContext) }
@@ -40,6 +41,9 @@ class BiddingApplication : Application() {
         }
         viewModel {
             ItemDetailsViewModel(itemApi = get())
+        }
+        viewModel {
+            MyPageViewModel(userApi = get())
         }
     }
 
