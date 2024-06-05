@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.seunghoon.bidding_android.R
 import com.seunghoon.bidding_android.databinding.FragmentItemsBinding
 import com.seunghoon.bidding_android.navigation.navigateToCreateItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,7 +21,7 @@ internal class ItemsFragment : Fragment() {
     private val viewModel: ItemsViewModel by viewModel()
 
     private val navController by lazy {
-        findNavController()
+        requireActivity().findNavController(R.id.container_main)
     }
 
     private lateinit var itemsAdapter: ItemsAdapter
