@@ -35,8 +35,12 @@ class MyPageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel
         collectMyPageSideEffect()
+        with(viewModel) {
+            fetchUserInformation()
+            fetchMyBidItems()
+            fetchMyItems()
+        }
         return binding.root
     }
 
@@ -47,8 +51,10 @@ class MyPageFragment : Fragment() {
                     with(binding) {
                         tvMyPageName.text = it.response.name
                         tvMyPageEmail.text = it.response.email
-                        Glide.with(requireContext()).load(it.response.profileImageUrl)
-                            .into(binding.imgMyPageProfile)
+                        context?.run {
+                            Glide.with(this).load(it.response.profileImageUrl)
+                                .into(binding.imgMyPageProfile)
+                        }
                     }
                 }
 

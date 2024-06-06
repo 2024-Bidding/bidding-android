@@ -18,21 +18,17 @@ internal class MyPageViewModel(
     private val itemApi: ItemApi,
 ) : BaseViewModel<Unit, MyPageSideEffect>(Unit) {
 
-    init {
-        fetchUserInformation()
-        fetchMyBidItems()
-        fetchMyItems()
-    }
-
-    private fun fetchUserInformation() {
+    internal fun fetchUserInformation() {
         viewModelScope.launch(Dispatchers.IO) {
             userApi.fetchUserInformation().onSuccess {
                 postSideEffect(MyPageSideEffect.Success(it))
+            }.onFailure {
+                Log.d("TEST", it.toString())
             }
         }
     }
 
-    private fun fetchMyBidItems() {
+    internal fun fetchMyBidItems() {
         viewModelScope.launch(Dispatchers.IO) {
             bidApi.fetchMyBidItems().onSuccess {
                 postSideEffect(MyPageSideEffect.SuccessFetchMyBidItems(items = it.toEntity()))
@@ -42,7 +38,7 @@ internal class MyPageViewModel(
         }
     }
 
-    private fun fetchMyItems() {
+    internal fun fetchMyItems() {
         viewModelScope.launch(Dispatchers.IO) {
             itemApi.fetchMyItems().onSuccess {
                 postSideEffect(MyPageSideEffect.SuccessFetchMyItems(items = it.toEntity()))
