@@ -1,15 +1,12 @@
 package com.seunghoon.bidding_android.feature.mypage
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.seunghoon.bidding_android.databinding.FragmentMyPageBinding
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageFragment : Fragment() {
@@ -40,6 +37,14 @@ class MyPageFragment : Fragment() {
                         Glide.with(requireContext()).load(it.response.profileImageUrl)
                             .into(binding.imgMyPageProfile)
                     }
+                }
+
+                is MyPageSideEffect.SuccessFetchMyBidItems -> {
+
+                }
+
+                is MyPageSideEffect.SuccessFetchMyItems -> {
+
                 }
             }
         }

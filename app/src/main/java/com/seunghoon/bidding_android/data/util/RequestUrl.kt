@@ -11,12 +11,14 @@ internal sealed class RequestUrl(val path: String) {
         val details = { itemId: Long ->
             "${this.path}/$itemId"
         }
+        val my = "${this.path}/my"
     }
 
     data object Bid : RequestUrl(path = "/bid") {
         val bidItem = { itemId: Long ->
             "${this.path}/$itemId"
         }
+        val my = "${this.path}/my"
     }
 
     data object File : RequestUrl(path = "/files") {

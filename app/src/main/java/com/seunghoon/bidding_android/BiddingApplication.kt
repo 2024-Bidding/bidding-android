@@ -1,6 +1,7 @@
 package com.seunghoon.bidding_android
 
 import android.app.Application
+import com.seunghoon.bidding_android.data.api.BidApi
 import com.seunghoon.bidding_android.data.api.FileApi
 import com.seunghoon.bidding_android.data.api.ItemApi
 import com.seunghoon.bidding_android.data.api.UserApi
@@ -20,6 +21,7 @@ class BiddingApplication : Application() {
     private val apiModule = module {
         single { UserApi(localStorage = get()) }
         single { ItemApi(localStorage = get()) }
+        single { BidApi(localStorage = get()) }
         single { FileApi() }
         single { LocalStorage(context = applicationContext) }
     }
@@ -40,10 +42,17 @@ class BiddingApplication : Application() {
             )
         }
         viewModel {
-            ItemDetailsViewModel(itemApi = get())
+            ItemDetailsViewModel(
+                itemApi = get(),
+                bidApi = get(),
+            )
         }
         viewModel {
-            MyPageViewModel(userApi = get())
+            MyPageViewModel(
+                userApi = get(),
+                bidApi = get(),
+                itemApi = get(),
+            )
         }
     }
 
