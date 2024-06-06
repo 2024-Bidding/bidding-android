@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.seunghoon.bidding_android.common.getFullImageUrl
 import com.seunghoon.bidding_android.databinding.ItemBinding
 import com.seunghoon.bidding_android.domain.entity.items.ItemsEntity
 import com.seunghoon.bidding_android.navigation.navigateToItemDetails
@@ -31,11 +32,11 @@ internal class ItemsAdapter(
         with(holder.binding) {
             item = items[position]
             Glide.with(holder.itemView.context)
-                .load("https://jobis-store.s3.ap-northeast-2.amazonaws.com/" + items[position].imageUrl)
+                .load(getFullImageUrl(items[position].imageUrl))
                 .into(imgItem)
 
             Glide.with(holder.itemView.context)
-                .load("https://jobis-store.s3.ap-northeast-2.amazonaws.com/" + items[position].userProfileImageUrl)
+                .load(getFullImageUrl(items[position].userProfileImageUrl))
                 .into(imgItemUserProfile)
         }
         holder.itemView.setOnClickListener {

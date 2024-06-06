@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.seunghoon.bidding_android.databinding.FragmentMyPageBinding
+import com.seunghoon.bidding_android.domain.entity.items.ItemsEntity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageFragment : Fragment() {
@@ -16,6 +17,18 @@ class MyPageFragment : Fragment() {
     }
 
     private val viewModel: MyPageViewModel by viewModel()
+
+    private lateinit var myItems: List<ItemsEntity.ItemEntity>
+
+    private lateinit var myBidItems: List<ItemsEntity.ItemEntity>
+
+    private val myItemsAdapter by lazy {
+        MyItemsAdapter(items = myItems)
+    }
+
+    private val myBidItemsAdapter by lazy {
+        MyItemsAdapter(items = myBidItems)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,11 +53,13 @@ class MyPageFragment : Fragment() {
                 }
 
                 is MyPageSideEffect.SuccessFetchMyBidItems -> {
-
+                    myBidItems = it.items.items
+                    binding.rvMyPageItemsBid.adapter = myBidItemsAdapter
                 }
 
                 is MyPageSideEffect.SuccessFetchMyItems -> {
-
+                    myItems = it.items.items
+                    binding.rvMyPageItems.adapter = myItemsAdapter
                 }
             }
         }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -75,7 +76,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_page_items_bid" />
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_items_bid"
+            tools:listitem="@layout/item_my" />
 
         <TextView
             android:id="@+id/tv_my_page_items"
@@ -97,7 +99,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_page_items" />
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_items"
+            tools:listitem="@layout/item_my" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
