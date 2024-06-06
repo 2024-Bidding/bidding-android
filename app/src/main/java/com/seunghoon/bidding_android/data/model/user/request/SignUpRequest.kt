@@ -8,4 +8,5 @@ internal data class SignUpRequest (
     @SerialName("email") val email: String,
     @SerialName("password") val password: String,
     @SerialName("name") val name: String,
+    @SerialName("profile_image_url") val profileImageUrl: String,
 )

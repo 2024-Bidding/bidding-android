@@ -7,14 +7,34 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <ImageView
-            android:id="@+id/img_sign_up_app_logo"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_sign_up_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="48dp"
-            android:src="@drawable/app_logo"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#D9D9D9"
+            app:strokeWidth="2dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add_photo"
+                app:tint="#9D9D9D" />
+
+            <ImageView
+                android:id="@+id/img_sign_up_profile"
+                android:layout_width="match_parent"
+                android:scaleType="center"
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_sign_up_email"
@@ -24,7 +44,7 @@
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_sign_up_app_logo">
+            app:layout_constraintTop_toBottomOf="@id/card_view_sign_up_profile">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_sign_up_email"

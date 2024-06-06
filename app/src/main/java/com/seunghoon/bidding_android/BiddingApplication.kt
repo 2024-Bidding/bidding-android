@@ -33,7 +33,12 @@ class BiddingApplication : Application() {
                 localStorage = get(),
             )
         }
-        viewModel { SignUpViewModel(userApi = get()) }
+        viewModel {
+            SignUpViewModel(
+                userApi = get(),
+                fileApi = get(),
+            )
+        }
         viewModel { ItemsViewModel(itemApi = get()) }
         viewModel {
             CreateItemViewModel(
