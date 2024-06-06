@@ -1,6 +1,7 @@
 package com.seunghoon.bidding_android.feature.details
 
 import androidx.lifecycle.viewModelScope
+import com.seunghoon.bidding_android.data.api.BidApi
 import com.seunghoon.bidding_android.data.api.ItemApi
 import com.seunghoon.bidding_android.data.model.item.request.BidItemRequest
 import com.seunghoon.bidding_android.data.model.item.response.ItemDetailsResponse
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 
 internal class ItemDetailsViewModel(
     private val itemApi: ItemApi,
+    private val bidApi: BidApi,
 ) : BaseViewModel<Unit, ItemDetailsSideEffect>(Unit) {
 
     internal fun fetchItemDetails(itemId: Long) {
@@ -27,7 +29,7 @@ internal class ItemDetailsViewModel(
         maxPrice: Long,
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            itemApi.bidItem(
+            bidApi.bidItem(
                 itemId = itemId,
                 bidItemRequest = BidItemRequest(price = price,)
             ).onSuccess {

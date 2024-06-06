@@ -22,7 +22,7 @@ internal class ItemApi(
     suspend fun fetchItems() = runCatching {
         RequestHandler<ItemsResponse>().request {
             ktorClient.get {
-                url(RequestUrl.Items.path)
+                url(RequestUrl.Item.path)
             }.body<ItemsResponse>()
         }
     }
@@ -30,7 +30,7 @@ internal class ItemApi(
     suspend fun createItem(createItemRequest: CreateItemRequest) = runCatching {
         RequestHandler<Unit>().request {
             ktorClient.post {
-                url(RequestUrl.Items.path)
+                url(RequestUrl.Item.path)
                 setBody(createItemRequest)
                 header(
                     key = "Authorization",
@@ -43,24 +43,8 @@ internal class ItemApi(
     suspend fun fetchItemDetails(itemId: Long) = runCatching {
         RequestHandler<ItemDetailsResponse>().request {
             ktorClient.get {
-                url("${RequestUrl.Items.path}/${itemId}")
+                url(RequestUrl.Item.details(itemId))
             }.body<ItemDetailsResponse>()
-        }
-    }
-
-    suspend fun bidItem(
-        itemId: Long,
-        bidItemRequest: BidItemRequest,
-    ) = runCatching {
-        RequestHandler<Unit>().request {
-            ktorClient.patch {
-                url("${RequestUrl.Items.bid}/${itemId}")
-                setBody(bidItemRequest)
-                header(
-                    key = "Authorization",
-                    value = localStorage.getValue(LocalStorage.ACCESS_TOKEN)
-                )
-            }
         }
     }
 }
