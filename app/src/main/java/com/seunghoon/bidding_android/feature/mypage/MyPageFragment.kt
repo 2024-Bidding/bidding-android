@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
+import com.seunghoon.bidding_android.common.insertIntoGlide
 import com.seunghoon.bidding_android.databinding.FragmentMyPageBinding
 import com.seunghoon.bidding_android.domain.entity.items.ItemsEntity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -52,8 +52,11 @@ class MyPageFragment : Fragment() {
                         tvMyPageName.text = it.response.name
                         tvMyPageEmail.text = it.response.email
                         context?.run {
-                            Glide.with(this).load(it.response.profileImageUrl)
-                                .into(binding.imgMyPageProfile)
+                            insertIntoGlide(
+                                context = this,
+                                imageView = binding.imgMyPageProfile,
+                                url = it.response.profileImageUrl,
+                            )
                         }
                     }
                 }

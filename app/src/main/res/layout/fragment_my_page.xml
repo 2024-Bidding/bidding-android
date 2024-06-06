@@ -44,7 +44,8 @@
                     <ImageView
                         android:id="@+id/img_my_page_profile"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:scaleType="center" />
 
                 </androidx.cardview.widget.CardView>
 

@@ -3,8 +3,7 @@ package com.seunghoon.bidding_android.feature.mypage
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.seunghoon.bidding_android.common.getFullImageUrl
+import com.seunghoon.bidding_android.common.insertIntoGlide
 import com.seunghoon.bidding_android.databinding.ItemMyBinding
 import com.seunghoon.bidding_android.domain.entity.items.ItemsEntity
 
@@ -27,7 +26,11 @@ class MyItemsAdapter(private val items: List<ItemsEntity.ItemEntity>) :
             tvItemMyTitle.text = item.name
             tvPrice.text = item.currentPrice
 
-            Glide.with(holder.itemView.context).load(getFullImageUrl(item.imageUrl)).into(imgItemMy)
+            insertIntoGlide(
+                context = holder.itemView.context,
+                imageView = imgItemMy,
+                url = item.imageUrl,
+            )
         }
     }
 
