@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.seunghoon.bidding_android.R
 import com.seunghoon.bidding_android.common.insertIntoGlide
 import com.seunghoon.bidding_android.databinding.ItemBinding
 import com.seunghoon.bidding_android.domain.entity.items.ItemsEntity
@@ -40,6 +41,12 @@ internal class ItemsAdapter(
                 context = context,
                 imageView = imgItemUserProfile,
                 url = items[position].userProfileImageUrl,
+            )
+            imgItemLike.setImageResource(
+                when (items[position].isLiked) {
+                    true -> R.drawable.ic_like
+                    else -> R.drawable.ic_like_off
+                }
             )
         }
         holder.itemView.setOnClickListener {

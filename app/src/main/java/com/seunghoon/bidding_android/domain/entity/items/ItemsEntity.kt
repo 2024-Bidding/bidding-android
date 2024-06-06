@@ -15,6 +15,7 @@ data class ItemsEntity(
         val currentPrice: String,
         val userName: String,
         val userProfileImageUrl: String,
+        val isLiked: Boolean,
     )
 }
 
@@ -30,4 +31,5 @@ private fun ItemsResponse.Item.toEntity() = ItemsEntity.ItemEntity(
     currentPrice = DecimalFormat("#,###").format(currentPrice),
     userName = userName,
     userProfileImageUrl = userProfileUrl,
+    isLiked = isLiked,
 )

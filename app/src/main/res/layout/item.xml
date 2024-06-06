@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -73,6 +74,16 @@
             app:layout_constraintBottom_toBottomOf="@id/cv_item_user_profile"
             app:layout_constraintEnd_toStartOf="@id/cv_item_user_profile"
             app:layout_constraintTop_toTopOf="@id/cv_item_user_profile" />
+
+        <ImageView
+            android:id="@+id/img_item_like"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_like_off"
+            android:tint="#8B8B8B"
+            app:layout_constraintEnd_toEndOf="@id/cv_item_user_profile"
+            app:layout_constraintTop_toTopOf="@id/cv_item_img"
+            tools:ignore="UseAppTint" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_item_user_profile"

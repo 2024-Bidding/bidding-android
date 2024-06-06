@@ -16,5 +16,6 @@ data class ItemsResponse(
         @SerialName("current_price") val currentPrice: Long,
         @SerialName("user_name") val userName: String,
         @SerialName("user_profile_url") val userProfileUrl: String,
+        @SerialName("is_liked") val isLiked: Boolean,
     )
 }
