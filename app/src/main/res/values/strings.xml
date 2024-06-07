@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">bidding-android</string>
+    <string name="app_name">Bidding</string>
 
     <!--Sign In-->
     <string name="email">이메일</string>
