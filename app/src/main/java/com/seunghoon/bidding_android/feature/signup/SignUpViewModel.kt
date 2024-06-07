@@ -70,7 +70,11 @@ internal class SignUpViewModel(
                     file = file,
                 ).onSuccess {
                     postSideEffect(SignUpSideEffect.SuccessFileUpload(profileImageUrl = response.filePath))
+                }.onFailure {
+                    it.printStackTrace()
                 }
+            }.onFailure {
+                it.printStackTrace()
             }
         }
     }
