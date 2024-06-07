@@ -2,6 +2,7 @@ package com.seunghoon.bidding_android.feature.items
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.seunghoon.bidding_android.R
@@ -13,6 +14,7 @@ import com.seunghoon.bidding_android.navigation.navigateToItemDetails
 internal class ItemsAdapter(
     private val items: MutableList<ItemsEntity.ItemEntity>,
     private val navController: NavController,
+    private val viewModel: ItemsViewModel,
 ) : RecyclerView.Adapter<ItemsAdapter.ItemsViewHolder>() {
     class ItemsViewHolder(val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -31,6 +33,8 @@ internal class ItemsAdapter(
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
         with(holder.binding) {
             val context = holder.itemView.context
+            val isLiked = items[position].isLiked
+
             item = items[position]
             insertIntoGlide(
                 context = context,
@@ -42,16 +46,27 @@ internal class ItemsAdapter(
                 imageView = imgItemUserProfile,
                 url = items[position].userProfileImageUrl,
             )
-            imgItemLike.setImageResource(
-                when (items[position].isLiked) {
-                    true -> R.drawable.ic_like
-                    else -> R.drawable.ic_like_off
-                }
-            )
+            imgItemLike.setLikeImage(isLiked)
+            imgItemLike.setOnClickListener {
+                viewModel.likeItem(items[position].id)
+
+                items[position] = items[position].copy(isLiked = !isLiked)
+
+                imgItemLike.setLikeImage(items[position].isLiked)
+            }
         }
         holder.itemView.setOnClickListener {
             navController.navigateToItemDetails(itemId = items[position].id)
         }
+    }
+
+    private fun ImageView.setLikeImage(isLiked: Boolean) {
+        setImageResource(
+            when (isLiked) {
+                true -> R.drawable.ic_like
+                else -> R.drawable.ic_like_off
+            }
+        )
     }
 
     fun clearItems() {

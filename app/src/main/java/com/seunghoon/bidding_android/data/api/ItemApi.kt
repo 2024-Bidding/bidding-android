@@ -10,6 +10,7 @@ import com.seunghoon.bidding_android.data.util.RequestUrl
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
@@ -59,6 +60,18 @@ internal class ItemApi(
                     value = localStorage.getValue(LocalStorage.ACCESS_TOKEN),
                 )
             }.body<ItemsResponse>()
+        }
+    }
+
+    suspend fun likeItem(itemId: Long) = runCatching {
+        RequestHandler<Unit>().request {
+            ktorClient.patch {
+                url(RequestUrl.Item.like(itemId))
+                header(
+                    key = "authorization",
+                    value = localStorage.getValue(LocalStorage.ACCESS_TOKEN)
+                )
+            }
         }
     }
 }

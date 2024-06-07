@@ -19,6 +19,16 @@ internal class ItemsViewModel(
             }
         }
     }
+
+    fun likeItem(itemId: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            itemApi.likeItem(itemId = itemId).onSuccess {
+
+            }.onFailure {
+                it.printStackTrace()
+            }
+        }
+    }
 }
 
 internal sealed interface ItemsSideEffect {
