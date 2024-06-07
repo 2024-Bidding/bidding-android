@@ -47,4 +47,7 @@
     <string name="my_page_title">마이페이지</string>
     <string name="my_page_items_bid">낙찰품 목록</string>
     <string name="my_page_items">물품 목록</string>
+
+    <!--Likes-->
+    <string name="likes_title">좋아요</string>
 </resources>

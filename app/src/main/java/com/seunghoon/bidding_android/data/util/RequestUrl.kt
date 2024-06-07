@@ -15,6 +15,7 @@ internal sealed class RequestUrl(val path: String) {
         val like = { itemId: Long ->
             "${this.path}/like/$itemId"
         }
+        val likes = "${this.path}/like"
     }
 
     data object Bid : RequestUrl(path = "/bid") {

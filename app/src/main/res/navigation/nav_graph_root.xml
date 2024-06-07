@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_items" />
 
     <fragment
+        android:id="@+id/likes"
+        android:name="com.seunghoon.bidding_android.feature.likes.LikesFragment"
+        android:label="Likes"
+        tools:layout="@layout/fragment_likes" />
+
+    <fragment
         android:id="@+id/my_page"
         android:name="com.seunghoon.bidding_android.feature.mypage.MyPageFragment"
         android:label="MyPage"

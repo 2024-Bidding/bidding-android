@@ -1,4 +1,4 @@
-package com.seunghoon.bidding_android.feature.items
+package com.seunghoon.bidding_android.feature.likes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.seunghoon.bidding_android.R
 import com.seunghoon.bidding_android.common.showToast
-import com.seunghoon.bidding_android.databinding.FragmentItemsBinding
-import com.seunghoon.bidding_android.navigation.navigateToCreateItem
+import com.seunghoon.bidding_android.databinding.FragmentLikesBinding
+import com.seunghoon.bidding_android.feature.items.ItemsAdapter
+import com.seunghoon.bidding_android.feature.items.ItemsSideEffect
+import com.seunghoon.bidding_android.feature.items.ItemsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-internal class ItemsFragment : Fragment() {
+class LikesFragment : Fragment() {
 
     private val binding by lazy {
-        FragmentItemsBinding.inflate(layoutInflater)
+        FragmentLikesBinding.inflate(layoutInflater)
     }
 
     private val viewModel: ItemsViewModel by viewModel()
@@ -25,17 +26,17 @@ internal class ItemsFragment : Fragment() {
         requireActivity().findNavController(R.id.container_main)
     }
 
-    private lateinit var itemsAdapter: ItemsAdapter
+    private lateinit var likesAdapter: ItemsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initView()
         collectItemsSideEffect()
+        viewModel.fetchItems()
 
-        itemsAdapter = ItemsAdapter(
+        likesAdapter = ItemsAdapter(
             items = mutableListOf(),
             navController = navController,
             viewModel = viewModel,
@@ -48,9 +49,9 @@ internal class ItemsFragment : Fragment() {
         viewModel.collectSideEffect {
             when (it) {
                 is ItemsSideEffect.Success -> {
-                    itemsAdapter.clearItems()
-                    itemsAdapter.addItems(it.items)
-                    binding.rvItems.adapter = itemsAdapter
+                    likesAdapter.clearItems()
+                    likesAdapter.addItems(it.items)
+                    binding.rvLikes.adapter = likesAdapter
                 }
 
                 is ItemsSideEffect.Failure -> {
@@ -58,18 +59,5 @@ internal class ItemsFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun initView() = with(binding) {
-        rvItems.layoutManager = LinearLayoutManager(context)
-        fabRegisterItem.setOnClickListener {
-            navController.navigateToCreateItem()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        itemsAdapter.clearItems()
-        viewModel.fetchItems()
     }
 }

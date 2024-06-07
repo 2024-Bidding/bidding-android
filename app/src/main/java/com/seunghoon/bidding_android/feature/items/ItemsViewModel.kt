@@ -29,8 +29,19 @@ internal class ItemsViewModel(
             }
         }
     }
+
+    fun likes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            itemApi.fetchLikeItems().onSuccess {
+                postSideEffect(ItemsSideEffect.Success(items = it.toEntity().items))
+            }.onFailure {
+                postSideEffect(ItemsSideEffect.Failure(message = it.toString()))
+            }
+        }
+    }
 }
 
 internal sealed interface ItemsSideEffect {
     data class Success(val items: List<ItemsEntity.ItemEntity>) : ItemsSideEffect
+    data class Failure(val message: String) : ItemsSideEffect
 }

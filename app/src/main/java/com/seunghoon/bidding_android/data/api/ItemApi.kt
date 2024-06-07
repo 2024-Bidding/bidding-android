@@ -68,10 +68,22 @@ internal class ItemApi(
             ktorClient.patch {
                 url(RequestUrl.Item.like(itemId))
                 header(
-                    key = "authorization",
+                    key = "Authorization",
                     value = localStorage.getValue(LocalStorage.ACCESS_TOKEN)
                 )
             }
+        }
+    }
+
+    suspend fun fetchLikeItems() = kotlin.runCatching {
+        RequestHandler<ItemsResponse>().request {
+            ktorClient.get {
+                url(RequestUrl.Item.likes)
+                header(
+                    key = "Authorization",
+                    value = localStorage.getValue(LocalStorage.ACCESS_TOKEN)
+                )
+            }.body<ItemsResponse>()
         }
     }
 }
