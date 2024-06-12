@@ -34,12 +34,13 @@ class LikesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         collectItemsSideEffect()
-        viewModel.fetchItems()
+        viewModel.likes()
 
         likesAdapter = ItemsAdapter(
             items = mutableListOf(),
             navController = navController,
             viewModel = viewModel,
+            isLikeAdapter = true,
         )
 
         return binding.root

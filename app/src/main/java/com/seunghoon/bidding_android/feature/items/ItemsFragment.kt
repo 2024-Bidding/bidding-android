@@ -39,6 +39,7 @@ internal class ItemsFragment : Fragment() {
             items = mutableListOf(),
             navController = navController,
             viewModel = viewModel,
+            isLikeAdapter = false,
         )
 
         return binding.root

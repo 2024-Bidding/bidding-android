@@ -15,6 +15,7 @@ internal class ItemsAdapter(
     private val items: MutableList<ItemsEntity.ItemEntity>,
     private val navController: NavController,
     private val viewModel: ItemsViewModel,
+    private val isLikeAdapter: Boolean,
 ) : RecyclerView.Adapter<ItemsAdapter.ItemsViewHolder>() {
     class ItemsViewHolder(val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -48,11 +49,16 @@ internal class ItemsAdapter(
             )
             imgItemLike.setLikeImage(isLiked)
             imgItemLike.setOnClickListener {
-                viewModel.likeItem(items[position].id)
-
                 items[position] = items[position].copy(isLiked = !isLiked)
 
+                viewModel.likeItem(items[position].id)
+
                 imgItemLike.setLikeImage(items[position].isLiked)
+
+                if (!items[position].isLiked && isLikeAdapter) {
+                    notifyItemRemoved(position)
+                    items.remove(items[position])
+                }
             }
         }
         holder.itemView.setOnClickListener {
