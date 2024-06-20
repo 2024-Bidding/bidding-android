@@ -102,6 +102,7 @@ class ItemDetailsFragment : Fragment() {
                             it.details.currentPrice.toString()
                         )
                         tvItemDetailsPagerCounterText.text = "1/${it.details.imageUrls.size}"
+                        btnItemDetailsBid.isEnabled = it.details.biddingAvailable
                     }
                     setViewPager(it.details.imageUrls)
                     onSwipedImageAdapter()

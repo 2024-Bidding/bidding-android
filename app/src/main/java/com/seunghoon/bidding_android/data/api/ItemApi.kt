@@ -47,6 +47,10 @@ internal class ItemApi(
         RequestHandler<ItemDetailsResponse>().request {
             ktorClient.get {
                 url(RequestUrl.Item.details(itemId))
+                header(
+                    key = "Authorization",
+                    value = localStorage.getValue(LocalStorage.ACCESS_TOKEN),
+                )
             }.body<ItemDetailsResponse>()
         }
     }
