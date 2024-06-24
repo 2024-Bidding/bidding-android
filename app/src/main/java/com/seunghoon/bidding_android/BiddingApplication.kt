@@ -10,6 +10,7 @@ import com.seunghoon.bidding_android.feature.details.ItemDetailsViewModel
 import com.seunghoon.bidding_android.feature.items.ItemsViewModel
 import com.seunghoon.bidding_android.feature.mypage.MyPageViewModel
 import com.seunghoon.bidding_android.feature.registeritem.CreateItemViewModel
+import com.seunghoon.bidding_android.feature.search.SearchViewModel
 import com.seunghoon.bidding_android.feature.signin.SignInViewModel
 import com.seunghoon.bidding_android.feature.signup.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -58,6 +59,9 @@ class BiddingApplication : Application() {
                 bidApi = get(),
                 itemApi = get(),
             )
+        }
+        viewModel {
+            SearchViewModel(itemApi = get())
         }
     }
 

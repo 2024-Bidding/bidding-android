@@ -1,7 +1,6 @@
 package com.seunghoon.bidding_android.feature.items
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,7 +72,6 @@ internal class ItemsFragment : Fragment() {
 
     private fun setToolbarNavigationIconOnClickListener() {
         binding.toolbar.setOnMenuItemClickListener { item ->
-            Log.d("TEST", (item.itemId to R.id.search).toString())
             when (item.itemId) {
                 R.id.search -> {
                     navController.navigateToSearch()
