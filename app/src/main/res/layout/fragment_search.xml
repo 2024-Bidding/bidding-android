@@ -12,7 +12,6 @@
             android:id="@+id/sv_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:iconifiedByDefault="false"
             android:queryBackground="@color/white"
             android:queryHint="물품 이름을 입력해주세요"

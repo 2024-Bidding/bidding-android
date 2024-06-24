@@ -1,10 +1,12 @@
 package com.seunghoon.bidding_android.feature.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -46,6 +48,8 @@ class SearchFragment : Fragment() {
     ): View {
         initView()
         collectSearchSideEffect()
+        setBackButtonListener()
+
 
         return binding.root
     }
@@ -66,9 +70,7 @@ class SearchFragment : Fragment() {
         })
     }
     private fun setItemsAdapter() {
-        binding.rvSearch.let {
-            it.adapter = itemsAdapter
-        }
+        binding.rvSearch.adapter = itemsAdapter
     }
 
     private fun collectSearchSideEffect() {
@@ -80,6 +82,12 @@ class SearchFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setBackButtonListener() {
+        requireActivity().onBackPressedDispatcher.addCallback {
+            navController.popBackStack()
         }
     }
 }
