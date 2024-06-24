@@ -77,6 +77,11 @@
             android:id="@+id/navigate_to_item_details"
             app:destination="@id/item_details" />
 
+        <action
+            android:id="@+id/navigate_to_sign_in"
+            app:destination="@id/sign_in"
+            app:popUpTo="@id/splash" />
+
     </fragment>
 
 </navigation>
