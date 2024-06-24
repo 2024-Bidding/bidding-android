@@ -45,16 +45,16 @@ internal class SignInFragment : Fragment() {
         signInViewModel.collectSideEffect {
             when (it) {
                 is SignInSideEffect.Success -> {
-                    requireContext().showToast(it.message)
+                    context?.showToast(it.message)
                     navController.navigateToRoot()
                 }
 
                 is SignInSideEffect.InvalidPassword -> {
-                    requireContext().showToast(it.message)
+                    context?.showToast(it.message)
                 }
 
                 is SignInSideEffect.NotFoundEmail -> {
-                    requireContext().showToast(it.message)
+                    context?.showToast(it.message)
                 }
             }
         }
