@@ -28,3 +28,7 @@ internal fun NavController.navigateToRoot() {
 internal fun NavController.navigateToCreateItem() {
     navigate(R.id.navigate_to_create_item)
 }
+
+internal fun NavController.navigateToSearch() {
+    navigate(R.id.navigate_to_search)
+}

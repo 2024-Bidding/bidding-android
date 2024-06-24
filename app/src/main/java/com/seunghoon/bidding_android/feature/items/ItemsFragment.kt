@@ -1,6 +1,7 @@
 package com.seunghoon.bidding_android.feature.items
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.seunghoon.bidding_android.R
 import com.seunghoon.bidding_android.common.showToast
 import com.seunghoon.bidding_android.databinding.FragmentItemsBinding
 import com.seunghoon.bidding_android.navigation.navigateToCreateItem
+import com.seunghoon.bidding_android.navigation.navigateToSearch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class ItemsFragment : Fragment() {
@@ -62,9 +64,28 @@ internal class ItemsFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
+        setToolbarNavigationIconOnClickListener()
         rvItems.layoutManager = LinearLayoutManager(context)
         fabRegisterItem.setOnClickListener {
             navController.navigateToCreateItem()
+        }
+    }
+
+    private fun setToolbarNavigationIconOnClickListener() {
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            Log.d("TEST", (item.itemId to R.id.search).toString())
+            when (item.itemId) {
+                R.id.search -> {
+                    navController.navigateToSearch()
+                }
+
+                R.id.filter -> {
+
+                }
+
+                else -> {}
+            }
+            true
         }
     }
 

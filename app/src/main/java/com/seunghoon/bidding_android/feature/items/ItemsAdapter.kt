@@ -1,5 +1,6 @@
 package com.seunghoon.bidding_android.feature.items
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -34,7 +35,6 @@ internal class ItemsAdapter(
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
         with(holder.binding) {
             val context = holder.itemView.context
-            val isLiked = items[position].isLiked
 
             item = items[position]
             insertIntoGlide(
@@ -47,9 +47,10 @@ internal class ItemsAdapter(
                 imageView = imgItemUserProfile,
                 url = items[position].userProfileImageUrl,
             )
-            imgItemLike.setLikeImage(isLiked)
+            imgItemLike.setLikeImage(items[position].isLiked)
             imgItemLike.setOnClickListener {
-                items[position] = items[position].copy(isLiked = !isLiked)
+                items[position] = items[position].copy(isLiked = !items[position].isLiked)
+                Log.d("TEST", items[position].isLiked.toString())
 
                 viewModel.likeItem(items[position].id)
 
@@ -70,7 +71,7 @@ internal class ItemsAdapter(
         setImageResource(
             when (isLiked) {
                 true -> R.drawable.ic_like
-                else -> R.drawable.ic_like_off
+                false -> R.drawable.ic_like_off
             }
         )
     }
