@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.seunghoon.bidding_android.common.showToast
 import com.seunghoon.bidding_android.databinding.FragmentCreateItemBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDateTime
@@ -46,6 +47,8 @@ class CreateItemFragment : Fragment() {
         setTimeListener(etRegisterItemStartTime)
         setTimeListener(etRegisterItemEndTime)
         handleRegisterItemSideEffect()
+        setCreateItemButtonOnClickListener()
+        btnRegisterItemRegister
 
         root
     }
@@ -143,5 +146,27 @@ class CreateItemFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setCreateItemButtonOnClickListener() {
+        binding.btnRegisterItemRegister.setOnClickListener {
+            if (checkInputValidation()) {
+                requireContext().showToast("모든 값을 입력해주세요")
+            } else {
+                createItemViewModel.createPresignedUrl()
+            }
+        }
+    }
+
+    private fun checkInputValidation() = with(binding) {
+        val uris = createItemViewModel.uris.isNotEmpty()
+        val isNameEmpty = etRegisterItemTitle.text.toString().isNotBlank()
+        val isStartPriceEmpty = etRegisterItemStartPrice.text.toString().isNotBlank()
+        val isEndPriceEmpty = etRegisterItemEndPrice.text.toString().isNotBlank()
+        val isStartDateEmpty = etRegisterItemStartDate.text.toString().isNotBlank()
+        val isEndDateEmpty = etRegisterItemEndDate.text.toString().isNotBlank()
+        val isDescriptionEmpty = etRegisterItemDescription.text.toString().isNotBlank()
+
+        return@with uris || isNameEmpty || isStartPriceEmpty || isEndPriceEmpty || isStartDateEmpty || isEndDateEmpty || isDescriptionEmpty
     }
 }
