@@ -19,17 +19,21 @@ internal class UserApi(
     private val localStorage: LocalStorage,
 ) {
     suspend fun signIn(signInRequest: SignInRequest): SignInResponse = with(ktorClient) {
-        return post {
-            url(RequestUrl.User.signIn)
-            setBody(signInRequest)
-        }.body<SignInResponse>()
+        return RequestHandler<SignInResponse>().request {
+            post {
+                url(RequestUrl.User.signIn)
+                setBody(signInRequest)
+            }.body<SignInResponse>()
+        }
     }
 
     suspend fun signUp(signUpRequest: SignUpRequest): Unit = with(ktorClient) {
-        return post {
-            url(RequestUrl.User.signUp)
-            setBody(signUpRequest)
-        }.body()
+        return RequestHandler<Unit>().request {
+            post {
+                url(RequestUrl.User.signUp)
+                setBody(signUpRequest)
+            }.body()
+        }
     }
 
     suspend fun fetchUserInformation() = runCatching {

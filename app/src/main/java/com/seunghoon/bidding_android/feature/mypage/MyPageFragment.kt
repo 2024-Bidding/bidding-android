@@ -33,11 +33,17 @@ class MyPageFragment : Fragment() {
     private lateinit var myBidItems: List<ItemsEntity.ItemEntity>
 
     private val myItemsAdapter by lazy {
-        MyItemsAdapter(items = myItems)
+        MyItemsAdapter(
+            items = myItems,
+            navController = navController,
+        )
     }
 
     private val myBidItemsAdapter by lazy {
-        MyItemsAdapter(items = myBidItems)
+        MyItemsAdapter(
+            items = myBidItems,
+            navController = navController,
+        )
     }
 
     private val navController by lazy {
@@ -104,11 +110,19 @@ class MyPageFragment : Fragment() {
                 }
 
                 is MyPageSideEffect.SuccessFetchMyBidItems -> {
+                    if (it.items.items.isEmpty()) {
+                        binding.tvMyPageItems.visibility = View.VISIBLE
+                        binding.rvMyPageItems.visibility = View.VISIBLE
+                    }
                     myBidItems = it.items.items
                     binding.rvMyPageItemsBid.adapter = myBidItemsAdapter
                 }
 
                 is MyPageSideEffect.SuccessFetchMyItems -> {
+                    if (it.items.items.isEmpty()) {
+                        binding.tvMyPageItemsBid.visibility = View.VISIBLE
+                        binding.rvMyPageItemsBid.visibility = View.VISIBLE
+                    }
                     myItems = it.items.items
                     binding.rvMyPageItems.adapter = myItemsAdapter
                 }

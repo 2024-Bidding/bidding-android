@@ -1,7 +1,6 @@
 package com.seunghoon.bidding_android.feature.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +68,7 @@ class SearchFragment : Fragment() {
             }
         })
     }
+
     private fun setItemsAdapter() {
         binding.rvSearch.adapter = itemsAdapter
     }

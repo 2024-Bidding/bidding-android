@@ -82,6 +82,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="62dp"
                     android:text="@string/my_page_items_bid"
+                    android:visibility="gone"
                     android:textSize="22sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -91,6 +92,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_my" />
 
@@ -101,6 +103,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/my_page_items"
+                    android:visibility="gone"
                     android:textSize="22sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -111,6 +114,7 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     android:paddingBottom="8dp"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_my" />
 
