@@ -23,7 +23,7 @@ internal class CreateItemViewModel(
     private val fileApi: FileApi,
 ) : BaseViewModel<RegisterItemState, RegisterItemSideEffect>(RegisterItemState.getDefaultState()) {
 
-    private val uris: MutableList<Uri> = mutableListOf()
+    internal val uris: MutableList<Uri> = mutableListOf()
     private val files: MutableList<File> = mutableListOf()
 
     fun createItem(

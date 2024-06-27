@@ -51,8 +51,12 @@ class LikesFragment : Fragment() {
             when (it) {
                 is ItemsSideEffect.Success -> {
                     likesAdapter.clearItems()
-                    likesAdapter.addItems(it.items)
-                    binding.rvLikes.adapter = likesAdapter
+                    if (it.items.isNotEmpty()) {
+                        likesAdapter.addItems(it.items)
+                        binding.rvLikes.adapter = likesAdapter
+                    } else {
+                        binding.linearLikesEmpty.visibility = View.VISIBLE
+                    }
                 }
 
                 is ItemsSideEffect.Failure -> {

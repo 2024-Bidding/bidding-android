@@ -10,7 +10,7 @@ import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.seunghoon.bidding_android.R
+import com.seunghoon.bidding_android.common.formatted
 import com.seunghoon.bidding_android.common.showToast
 import com.seunghoon.bidding_android.databinding.FragmentItemDetailsBinding
 import com.seunghoon.bidding_android.navigation.NavArguments
@@ -97,11 +97,9 @@ class ItemDetailsFragment : Fragment() {
                 is ItemDetailsSideEffect.Success -> {
                     with(binding) {
                         details = it.details
-                        tvItemDetailsPrice.text = getString(
-                            R.string.item_details_current_price,
-                            it.details.currentPrice.toString()
-                        )
+                        tvItemDetailsPrice.text = it.details.currentPrice.formatted() + "원"
                         tvItemDetailsPagerCounterText.text = "1/${it.details.imageUrls.size}"
+                        btnItemDetailsBid.isEnabled = it.details.biddingAvailable
                     }
                     setViewPager(it.details.imageUrls)
                     onSwipedImageAdapter()

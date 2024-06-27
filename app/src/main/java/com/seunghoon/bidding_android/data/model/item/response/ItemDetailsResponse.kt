@@ -15,4 +15,5 @@ data class ItemDetailsResponse(
     @SerialName("bidding_status") val biddingStatus: BiddingStatus,
     @SerialName("user_name") val userName: String,
     @SerialName("content") val content: String,
+    @SerialName("bidding_available") val biddingAvailable: Boolean,
 )

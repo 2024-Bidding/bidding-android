@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.seunghoon.bidding_android.common.showToast
 import com.seunghoon.bidding_android.databinding.FragmentCreateItemBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDateTime
@@ -46,6 +48,8 @@ class CreateItemFragment : Fragment() {
         setTimeListener(etRegisterItemStartTime)
         setTimeListener(etRegisterItemEndTime)
         handleRegisterItemSideEffect()
+        setCreateItemButtonOnClickListener()
+        btnRegisterItemRegister
 
         root
     }
@@ -143,5 +147,31 @@ class CreateItemFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setCreateItemButtonOnClickListener() {
+        binding.btnRegisterItemRegister.setOnClickListener {
+            if (!checkInputValidation()) {
+                requireContext().showToast("모든 값을 입력해주세요")
+            } else {
+                createItemViewModel.createPresignedUrl()
+            }
+        }
+    }
+
+    private fun checkInputValidation() = with(binding) {
+        val isUrisNotEmpty = createItemViewModel.uris.isNotEmpty()
+        val isNameNotBlank = etRegisterItemTitle.text.toString().isNotBlank()
+        val isStartPriceNotBlank = etRegisterItemStartPrice.text.toString().isNotBlank()
+        val isEndPriceNotBlank = etRegisterItemEndPrice.text.toString().isNotBlank()
+        val isStartDateNotBlank = etRegisterItemStartDate.text.toString().isNotBlank()
+        val isEndDateNotBlank = etRegisterItemEndDate.text.toString().isNotBlank()
+        val isStartTimeNotBlank = etRegisterItemStartTime.text.toString().isNotBlank()
+        val isEndTimeNotBlank = etRegisterItemEndTime.text.toString().isNotBlank()
+        val isDescriptionNotBlank = etRegisterItemDescription.text.toString().isNotBlank()
+
+        Log.d("TEST", "$isUrisNotEmpty $isNameNotBlank $isStartPriceNotBlank $isEndPriceNotBlank $isStartDateNotBlank $isEndDateNotBlank $isDescriptionNotBlank")
+
+        return@with isUrisNotEmpty && isNameNotBlank && isStartPriceNotBlank && isEndPriceNotBlank && isStartDateNotBlank && isStartTimeNotBlank && isEndTimeNotBlank && isEndDateNotBlank && isDescriptionNotBlank
     }
 }

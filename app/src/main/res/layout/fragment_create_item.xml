@@ -283,7 +283,6 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginBottom="24dp"
             android:backgroundTint="?attr/colorPrimaryContainer"
-            android:onClick="@{() -> viewModel.createPresignedUrl()}"
             android:text="@string/do_register"
             android:textColor="@color/black"
             android:textSize="16sp"

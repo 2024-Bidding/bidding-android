@@ -6,10 +6,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
+            android:layout_marginTop="48dp"
             android:id="@+id/container_main"
+            android:fitsSystemWindows="true"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

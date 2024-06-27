@@ -1,5 +1,6 @@
 package com.seunghoon.bidding_android.feature.signin
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.seunghoon.bidding_android.data.api.UserApi
 import com.seunghoon.bidding_android.data.model.user.request.SignInRequest
@@ -34,6 +35,7 @@ internal class SignInViewModel(
                 )
                 postSideEffect(SignInSideEffect.Success("성공적으로 로그인되었습니다."))
             }.onFailure {
+                Log.d("TEST", it.toString())
                 when (it) {
                     is Unauthorized -> postSideEffect(SignInSideEffect.InvalidPassword("잘못된 비밀번호입니다."))
                     is NotFound -> postSideEffect(SignInSideEffect.NotFoundEmail("존재하지 않는 이메일입니다."))

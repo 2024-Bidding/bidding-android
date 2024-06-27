@@ -19,6 +19,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/btn_my_page_logout"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:tint="#B1B1B1"
+            android:src="@drawable/ic_logout"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_page_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_my_page_title" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -71,6 +82,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="62dp"
                     android:text="@string/my_page_items_bid"
+                    android:visibility="gone"
                     android:textSize="22sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -80,6 +92,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_my" />
 
@@ -90,6 +103,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/my_page_items"
+                    android:visibility="gone"
                     android:textSize="22sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -100,6 +114,7 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     android:paddingBottom="8dp"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_my" />
 

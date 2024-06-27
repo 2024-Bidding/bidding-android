@@ -77,6 +77,23 @@
             android:id="@+id/navigate_to_item_details"
             app:destination="@id/item_details" />
 
+        <action
+            android:id="@+id/navigate_to_sign_in"
+            app:destination="@id/sign_in"
+            app:popUpTo="@id/splash" />
+
+        <action
+            android:id="@+id/navigate_to_search"
+            app:destination="@id/search"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/search"
+        android:name="com.seunghoon.bidding_android.feature.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+
     </fragment>
 
 </navigation>
