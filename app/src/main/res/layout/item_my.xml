@@ -12,6 +12,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_item_my_image"
             android:layout_width="96dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="96dp"
             app:cardCornerRadius="12dp">
 
