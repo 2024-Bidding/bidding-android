@@ -110,7 +110,7 @@ class MyPageFragment : Fragment() {
                 }
 
                 is MyPageSideEffect.SuccessFetchMyBidItems -> {
-                    if (it.items.items.isEmpty()) {
+                    if (it.items.items.isNotEmpty()) {
                         binding.tvMyPageItems.visibility = View.VISIBLE
                         binding.rvMyPageItems.visibility = View.VISIBLE
                     }
@@ -119,7 +119,7 @@ class MyPageFragment : Fragment() {
                 }
 
                 is MyPageSideEffect.SuccessFetchMyItems -> {
-                    if (it.items.items.isEmpty()) {
+                    if (it.items.items.isNotEmpty()) {
                         binding.tvMyPageItemsBid.visibility = View.VISIBLE
                         binding.rvMyPageItemsBid.visibility = View.VISIBLE
                     }
