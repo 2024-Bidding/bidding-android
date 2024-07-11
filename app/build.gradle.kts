@@ -34,24 +34,24 @@ android {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = properties.getProperty("BASE_URL", "\"\""),
+                value = properties.getProperty("BASE_URL", "\"\"")
             )
             buildConfigField(
                 type = "String",
                 name = "FILE_BASE_URL",
-                value = properties.getProperty("FILE_BASE_URL", "\"\""),
+                value = properties.getProperty("FILE_BASE_URL", "\"\"")
             )
         }
         debug {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = properties.getProperty("BASE_URL", "\"\""),
+                value = properties.getProperty("BASE_URL", "\"\"")
             )
             buildConfigField(
                 type = "String",
                 name = "FILE_BASE_URL",
-                value = properties.getProperty("FILE_BASE_URL", "\"\""),
+                value = properties.getProperty("FILE_BASE_URL", "\"\"")
             )
         }
     }
