@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.org.jetbrains.kotlin.serialization)
+    alias(libs.plugins.ktlint.gradle)
 }
 
 val properties = Properties()
@@ -29,6 +30,16 @@ android {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
+            )
+            buildConfigField(
+                type = "String",
+                name = "BASE_URL",
+                value = properties.getProperty("BASE_URL", "\"\""),
+            )
+            buildConfigField(
+                type = "String",
+                name = "FILE_BASE_URL",
+                value = properties.getProperty("FILE_BASE_URL", "\"\""),
             )
         }
         debug {
