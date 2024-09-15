@@ -14,18 +14,20 @@ class MyItemsAdapter(
     private val navController: NavController,
 ) :
     RecyclerView.Adapter<MyItemsAdapter.MyItemsViewHolder>() {
-
     class MyItemsViewHolder(val binding: ItemMyBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): MyItemsViewHolder {
         val binding = ItemMyBinding.inflate(LayoutInflater.from(parent.context))
         return MyItemsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyItemsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: MyItemsViewHolder,
+        position: Int,
+    ) {
         val item = items[position]
         with(holder.binding) {
             tvItemMyTitle.text = item.name

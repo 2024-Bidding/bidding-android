@@ -11,7 +11,6 @@ import com.seunghoon.bidding_android.R
 import com.seunghoon.bidding_android.databinding.FragmentRootBinding
 
 class RootFragment : Fragment() {
-
     private val binding: FragmentRootBinding by lazy {
         FragmentRootBinding.inflate(layoutInflater)
     }
@@ -24,7 +23,7 @@ class RootFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         setBottomNavigation()
         return binding.root
@@ -39,4 +38,3 @@ class RootFragment : Fragment() {
         binding.unbind()
     }
 }
-

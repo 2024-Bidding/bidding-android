@@ -17,7 +17,6 @@ import com.seunghoon.bidding_android.navigation.navigateToSignIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpFragment : Fragment() {
-
     private val signUpViewModel: SignUpViewModel by viewModel()
 
     private lateinit var binding: FragmentSignUpBinding
@@ -31,7 +30,7 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSignUpBinding.inflate(inflater)
         collectSignUpSideEffect()
@@ -67,48 +66,51 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun setDoSignInTextEvent() = with(binding) {
-        tvSignUpDoSignIn.setOnClickListener {
-            navController.navigateToSignIn()
+    private fun setDoSignInTextEvent() =
+        with(binding) {
+            tvSignUpDoSignIn.setOnClickListener {
+                navController.navigateToSignIn()
+            }
         }
-    }
 
-    private fun setPictureListener() = with(binding) {
-        val launcher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                result.data?.data?.run {
-                    imageUri = this
-                    binding.imgSignUpProfile.visibility = View.VISIBLE
-                    Glide.with(requireContext()).load(this).into(binding.imgSignUpProfile)
+    private fun setPictureListener() =
+        with(binding) {
+            val launcher =
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    result.data?.data?.run {
+                        imageUri = this
+                        binding.imgSignUpProfile.visibility = View.VISIBLE
+                        Glide.with(requireContext()).load(this).into(binding.imgSignUpProfile)
+                    }
+                }
+
+            cardViewSignUpProfile.setOnClickListener {
+                Intent(Intent.ACTION_GET_CONTENT).run {
+                    setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+                    action = Intent.ACTION_PICK
+                    launcher.launch(this)
                 }
             }
-
-        cardViewSignUpProfile.setOnClickListener {
-            Intent(Intent.ACTION_GET_CONTENT).run {
-                setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
-                action = Intent.ACTION_PICK
-                launcher.launch(this)
-            }
         }
-    }
 
-    private fun setSignUpButtonEvent() = with(binding) {
-        btnSignInSignIn.setOnClickListener {
-            if (imageUri == null) {
-                with(binding) {
-                    signUpViewModel.signUp(
-                        email = etSignUpEmail.text.toString(),
-                        name = etSignUpName.text.toString(),
-                        password = etSignUpPassword.text.toString(),
-                        profileImageUrl = "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
+    private fun setSignUpButtonEvent() =
+        with(binding) {
+            btnSignInSignIn.setOnClickListener {
+                if (imageUri == null) {
+                    with(binding) {
+                        signUpViewModel.signUp(
+                            email = etSignUpEmail.text.toString(),
+                            name = etSignUpName.text.toString(),
+                            password = etSignUpPassword.text.toString(),
+                            profileImageUrl = "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
+                        )
+                    }
+                } else {
+                    signUpViewModel.uploadImage(
+                        uri = imageUri!!,
+                        context = requireContext(),
                     )
                 }
-            } else {
-                signUpViewModel.uploadImage(
-                    uri = imageUri!!,
-                    context = requireContext(),
-                )
             }
         }
-    }
 }

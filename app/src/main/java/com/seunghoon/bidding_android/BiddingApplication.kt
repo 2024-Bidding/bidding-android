@@ -18,59 +18,61 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 class BiddingApplication : Application() {
+    private val apiModule =
+        module {
+            single { UserApi(localStorage = get()) }
+            single { ItemApi(localStorage = get()) }
+            single { BidApi(localStorage = get()) }
+            single { FileApi() }
+            single { LocalStorage(context = applicationContext) }
+        }
 
-    private val apiModule = module {
-        single { UserApi(localStorage = get()) }
-        single { ItemApi(localStorage = get()) }
-        single { BidApi(localStorage = get()) }
-        single { FileApi() }
-        single { LocalStorage(context = applicationContext) }
-    }
+    private val viewModelModule =
+        module {
+            viewModel {
+                SignInViewModel(
+                    userApi = get(),
+                    localStorage = get(),
+                )
+            }
+            viewModel {
+                SignUpViewModel(
+                    userApi = get(),
+                    fileApi = get(),
+                )
+            }
+            viewModel { ItemsViewModel(itemApi = get()) }
+            viewModel {
+                CreateItemViewModel(
+                    itemApi = get(),
+                    fileApi = get(),
+                )
+            }
+            viewModel {
+                ItemDetailsViewModel(
+                    itemApi = get(),
+                    bidApi = get(),
+                )
+            }
+            viewModel {
+                MyPageViewModel(
+                    userApi = get(),
+                    bidApi = get(),
+                    itemApi = get(),
+                )
+            }
+            viewModel {
+                SearchViewModel(itemApi = get())
+            }
+        }
 
-    private val viewModelModule = module {
-        viewModel {
-            SignInViewModel(
-                userApi = get(),
-                localStorage = get(),
+    private val biddingModule =
+        module {
+            includes(
+                apiModule,
+                viewModelModule,
             )
         }
-        viewModel {
-            SignUpViewModel(
-                userApi = get(),
-                fileApi = get(),
-            )
-        }
-        viewModel { ItemsViewModel(itemApi = get()) }
-        viewModel {
-            CreateItemViewModel(
-                itemApi = get(),
-                fileApi = get(),
-            )
-        }
-        viewModel {
-            ItemDetailsViewModel(
-                itemApi = get(),
-                bidApi = get(),
-            )
-        }
-        viewModel {
-            MyPageViewModel(
-                userApi = get(),
-                bidApi = get(),
-                itemApi = get(),
-            )
-        }
-        viewModel {
-            SearchViewModel(itemApi = get())
-        }
-    }
-
-    private val biddingModule = module {
-        includes(
-            apiModule,
-            viewModelModule,
-        )
-    }
 
     override fun onCreate() {
         super.onCreate()
@@ -80,5 +82,3 @@ class BiddingApplication : Application() {
         }
     }
 }
-
-

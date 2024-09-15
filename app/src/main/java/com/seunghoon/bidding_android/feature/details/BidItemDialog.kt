@@ -13,7 +13,6 @@ internal class BidItemDialog(
     private val maxPrice: Long,
     private val bidItemDialogListener: BidItemDialogListener,
 ) : Dialog(context) {
-
     private val binding by lazy {
         DialogBidItemBinding.inflate(layoutInflater)
     }

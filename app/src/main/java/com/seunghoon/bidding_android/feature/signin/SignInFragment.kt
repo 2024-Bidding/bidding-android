@@ -13,7 +13,6 @@ import com.seunghoon.bidding_android.navigation.navigateToSignUp
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class SignInFragment : Fragment() {
-
     private val binding: FragmentSignInBinding by lazy {
         FragmentSignInBinding.inflate(layoutInflater)
     }
@@ -27,7 +26,7 @@ internal class SignInFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         collectSignInSideEffect()
         setDoSignUpTextEvent()
@@ -60,18 +59,20 @@ internal class SignInFragment : Fragment() {
         }
     }
 
-    private fun setDoSignUpTextEvent() = with(binding) {
-        tvSignInDoSignUp.setOnClickListener {
-            navController.navigateToSignUp()
+    private fun setDoSignUpTextEvent() =
+        with(binding) {
+            tvSignInDoSignUp.setOnClickListener {
+                navController.navigateToSignUp()
+            }
         }
-    }
 
-    private fun setSignInButtonEvent() = with(binding) {
-        btnSignInSignIn.setOnClickListener {
-            signInViewModel.signIn(
-                email = etSignInEmail.text.toString(),
-                password = etSignInPassword.text.toString(),
-            )
+    private fun setSignInButtonEvent() =
+        with(binding) {
+            btnSignInSignIn.setOnClickListener {
+                signInViewModel.signIn(
+                    email = etSignInEmail.text.toString(),
+                    password = etSignInPassword.text.toString(),
+                )
+            }
         }
-    }
 }

@@ -15,7 +15,6 @@ import com.seunghoon.bidding_android.feature.items.ItemsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LikesFragment : Fragment() {
-
     private val binding by lazy {
         FragmentLikesBinding.inflate(layoutInflater)
     }
@@ -31,17 +30,18 @@ class LikesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         collectItemsSideEffect()
         viewModel.likes()
 
-        likesAdapter = ItemsAdapter(
-            items = mutableListOf(),
-            navController = navController,
-            viewModel = viewModel,
-            isLikeAdapter = true,
-        )
+        likesAdapter =
+            ItemsAdapter(
+                items = mutableListOf(),
+                navController = navController,
+                viewModel = viewModel,
+                isLikeAdapter = true,
+            )
 
         return binding.root
     }

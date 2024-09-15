@@ -18,33 +18,36 @@ import io.ktor.client.request.url
 internal class UserApi(
     private val localStorage: LocalStorage,
 ) {
-    suspend fun signIn(signInRequest: SignInRequest): SignInResponse = with(ktorClient) {
-        return RequestHandler<SignInResponse>().request {
-            post {
-                url(RequestUrl.User.signIn)
-                setBody(signInRequest)
-            }.body<SignInResponse>()
+    suspend fun signIn(signInRequest: SignInRequest): SignInResponse =
+        with(ktorClient) {
+            return RequestHandler<SignInResponse>().request {
+                post {
+                    url(RequestUrl.User.signIn)
+                    setBody(signInRequest)
+                }.body<SignInResponse>()
+            }
         }
-    }
 
-    suspend fun signUp(signUpRequest: SignUpRequest): Unit = with(ktorClient) {
-        return RequestHandler<Unit>().request {
-            post {
-                url(RequestUrl.User.signUp)
-                setBody(signUpRequest)
-            }.body()
+    suspend fun signUp(signUpRequest: SignUpRequest): Unit =
+        with(ktorClient) {
+            return RequestHandler<Unit>().request {
+                post {
+                    url(RequestUrl.User.signUp)
+                    setBody(signUpRequest)
+                }.body()
+            }
         }
-    }
 
-    suspend fun fetchUserInformation() = runCatching {
-        RequestHandler<UserResponse>().request {
-            ktorClient.get {
-                url(RequestUrl.User.my)
-                header(
-                    key = "Authorization",
-                    value = localStorage.getValue(LocalStorage.ACCESS_TOKEN)
-                )
-            }.body<UserResponse>()
+    suspend fun fetchUserInformation() =
+        runCatching {
+            RequestHandler<UserResponse>().request {
+                ktorClient.get {
+                    url(RequestUrl.User.my)
+                    header(
+                        key = "Authorization",
+                        value = localStorage.getValue(LocalStorage.ACCESS_TOKEN),
+                    )
+                }.body<UserResponse>()
+            }
         }
-    }
 }

@@ -45,9 +45,10 @@ internal class SearchViewModel(
         viewModelScope.launch {
             keyword.debounce(1000L).collect { keyword ->
                 items.clear()
-                items.addAll(_items.filter { item ->
-                    item.name.contains(keyword)
-                }
+                items.addAll(
+                    _items.filter { item ->
+                        item.name.contains(keyword)
+                    },
                 )
                 postSideEffect(SearchSideEffect.Success(items))
             }

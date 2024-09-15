@@ -32,7 +32,10 @@ internal class ItemsAdapter(
         return items.size
     }
 
-    override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ItemsViewHolder,
+        position: Int,
+    ) {
         with(holder.binding) {
             val context = holder.itemView.context
 
@@ -72,7 +75,7 @@ internal class ItemsAdapter(
             when (isLiked) {
                 true -> R.drawable.ic_like
                 false -> R.drawable.ic_like_off
-            }
+            },
         )
     }
 

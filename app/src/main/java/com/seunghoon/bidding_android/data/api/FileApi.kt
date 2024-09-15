@@ -19,14 +19,15 @@ import io.ktor.util.cio.readChannel
 import java.io.File
 
 internal class FileApi {
-    suspend fun createPresignedUrl(createPresignedUrl: CreatePresignedUrlRequest) = runCatching {
-        RequestHandler<CreatePresignedUrlResponse>().request {
-            ktorFileClient.post {
-                url(RequestUrl.File.presignedUrl)
-                setBody(createPresignedUrl)
-            }.body<CreatePresignedUrlResponse>()
+    suspend fun createPresignedUrl(createPresignedUrl: CreatePresignedUrlRequest) =
+        runCatching {
+            RequestHandler<CreatePresignedUrlResponse>().request {
+                ktorFileClient.post {
+                    url(RequestUrl.File.presignedUrl)
+                    setBody(createPresignedUrl)
+                }.body<CreatePresignedUrlResponse>()
+            }
         }
-    }
 
     suspend fun uploadFile(
         presignedUrl: String,

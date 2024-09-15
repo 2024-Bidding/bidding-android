@@ -14,7 +14,6 @@ internal class ItemDetailsViewModel(
     private val itemApi: ItemApi,
     private val bidApi: BidApi,
 ) : BaseViewModel<Unit, ItemDetailsSideEffect>(Unit) {
-
     internal fun fetchItemDetails(itemId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             itemApi.fetchItemDetails(itemId).onSuccess {
@@ -31,7 +30,7 @@ internal class ItemDetailsViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             bidApi.bidItem(
                 itemId = itemId,
-                bidItemRequest = BidItemRequest(price = price,)
+                bidItemRequest = BidItemRequest(price = price),
             ).onSuccess {
                 if (price >= maxPrice) {
                     postSideEffect(ItemDetailsSideEffect.BidSuccessful)
@@ -51,7 +50,10 @@ internal class ItemDetailsViewModel(
 
 internal sealed interface ItemDetailsSideEffect {
     data class Success(val details: ItemDetailsResponse) : ItemDetailsSideEffect
+
     data object BidSuccess : ItemDetailsSideEffect
+
     data object BidSuccessful : ItemDetailsSideEffect
+
     data class Failure(val message: String) : ItemDetailsSideEffect
 }

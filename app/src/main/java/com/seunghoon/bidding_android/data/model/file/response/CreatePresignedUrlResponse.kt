@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CreatePresignedUrlResponse(
-    @SerialName("urls") val urls: List<UrlResponse>
+    @SerialName("urls") val urls: List<UrlResponse>,
 ) {
     @Serializable
     data class UrlResponse(

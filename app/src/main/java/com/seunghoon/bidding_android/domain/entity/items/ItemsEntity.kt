@@ -1,6 +1,5 @@
 package com.seunghoon.bidding_android.domain.entity.items
 
-import com.seunghoon.bidding_android.data.enums.BiddingStatus
 import com.seunghoon.bidding_android.data.model.item.response.ItemsResponse
 import java.text.DecimalFormat
 
@@ -19,17 +18,19 @@ data class ItemsEntity(
     )
 }
 
-internal fun ItemsResponse.toEntity() = ItemsEntity(
-    items = items.map { it.toEntity() },
-)
+internal fun ItemsResponse.toEntity() =
+    ItemsEntity(
+        items = items.map { it.toEntity() },
+    )
 
-private fun ItemsResponse.Item.toEntity() = ItemsEntity.ItemEntity(
-    id = id,
-    name = name,
-    imageUrl = imageUrl,
-    endTime = endTime.split("T")[0],
-    currentPrice = DecimalFormat("#,###").format(currentPrice),
-    userName = userName,
-    userProfileImageUrl = userProfileUrl,
-    isLiked = isLiked,
-)
+private fun ItemsResponse.Item.toEntity() =
+    ItemsEntity.ItemEntity(
+        id = id,
+        name = name,
+        imageUrl = imageUrl,
+        endTime = endTime.split("T")[0],
+        currentPrice = DecimalFormat("#,###").format(currentPrice),
+        userName = userName,
+        userProfileImageUrl = userProfileUrl,
+        isLiked = isLiked,
+    )

@@ -17,7 +17,6 @@ internal class MyPageViewModel(
     private val bidApi: BidApi,
     private val itemApi: ItemApi,
 ) : BaseViewModel<Unit, MyPageSideEffect>(Unit) {
-
     internal fun fetchUserInformation() {
         viewModelScope.launch(Dispatchers.IO) {
             userApi.fetchUserInformation().onSuccess {
@@ -51,6 +50,8 @@ internal class MyPageViewModel(
 
 sealed interface MyPageSideEffect {
     data class Success(val response: UserResponse) : MyPageSideEffect
+
     data class SuccessFetchMyBidItems(val items: ItemsEntity) : MyPageSideEffect
+
     data class SuccessFetchMyItems(val items: ItemsEntity) : MyPageSideEffect
 }
