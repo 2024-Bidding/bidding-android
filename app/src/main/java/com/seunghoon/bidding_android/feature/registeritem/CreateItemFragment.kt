@@ -21,7 +21,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDateTime
 
 class CreateItemFragment : Fragment() {
-
     private lateinit var binding: FragmentCreateItemBinding
 
     private val createItemViewModel: CreateItemViewModel by viewModel()
@@ -35,7 +34,7 @@ class CreateItemFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) = with(FragmentCreateItemBinding.inflate(inflater)) {
         binding = this
         binding.viewModel = createItemViewModel
@@ -65,33 +64,34 @@ class CreateItemFragment : Fragment() {
         binding.rvImages.adapter = registerImageAdapter
     }
 
-    private fun setPictureListener() = with(binding) {
-        val launcher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                val files = result.data?.clipData
-                binding.rvImages.visibility = View.VISIBLE
-                files?.run {
-                    repeat(this.itemCount) { index ->
-                        val uri = getItemAt(index).uri
-                        createItemViewModel.addUri(
-                            context = requireContext(),
-                            uri = uri,
-                        )
-                        registerImageAdapter.addImage(uri)
-                        registerImageAdapter.notifyItemInserted(registerImageAdapter.itemCount - 1)
+    private fun setPictureListener() =
+        with(binding) {
+            val launcher =
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    val files = result.data?.clipData
+                    binding.rvImages.visibility = View.VISIBLE
+                    files?.run {
+                        repeat(this.itemCount) { index ->
+                            val uri = getItemAt(index).uri
+                            createItemViewModel.addUri(
+                                context = requireContext(),
+                                uri = uri,
+                            )
+                            registerImageAdapter.addImage(uri)
+                            registerImageAdapter.notifyItemInserted(registerImageAdapter.itemCount - 1)
+                        }
                     }
                 }
-            }
 
-        cardViewRegisterItem.setOnClickListener {
-            Intent(Intent.ACTION_GET_CONTENT).run {
-                setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
-                action = Intent.ACTION_PICK
-                putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                launcher.launch(this)
+            cardViewRegisterItem.setOnClickListener {
+                Intent(Intent.ACTION_GET_CONTENT).run {
+                    setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+                    action = Intent.ACTION_PICK
+                    putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                    launcher.launch(this)
+                }
             }
         }
-    }
 
     @SuppressLint("SetTextI18n")
     private fun setDateListener(view: EditText) {
@@ -159,19 +159,23 @@ class CreateItemFragment : Fragment() {
         }
     }
 
-    private fun checkInputValidation() = with(binding) {
-        val isUrisNotEmpty = createItemViewModel.uris.isNotEmpty()
-        val isNameNotBlank = etRegisterItemTitle.text.toString().isNotBlank()
-        val isStartPriceNotBlank = etRegisterItemStartPrice.text.toString().isNotBlank()
-        val isEndPriceNotBlank = etRegisterItemEndPrice.text.toString().isNotBlank()
-        val isStartDateNotBlank = etRegisterItemStartDate.text.toString().isNotBlank()
-        val isEndDateNotBlank = etRegisterItemEndDate.text.toString().isNotBlank()
-        val isStartTimeNotBlank = etRegisterItemStartTime.text.toString().isNotBlank()
-        val isEndTimeNotBlank = etRegisterItemEndTime.text.toString().isNotBlank()
-        val isDescriptionNotBlank = etRegisterItemDescription.text.toString().isNotBlank()
+    private fun checkInputValidation() =
+        with(binding) {
+            val isUrisNotEmpty = createItemViewModel.uris.isNotEmpty()
+            val isNameNotBlank = etRegisterItemTitle.text.toString().isNotBlank()
+            val isStartPriceNotBlank = etRegisterItemStartPrice.text.toString().isNotBlank()
+            val isEndPriceNotBlank = etRegisterItemEndPrice.text.toString().isNotBlank()
+            val isStartDateNotBlank = etRegisterItemStartDate.text.toString().isNotBlank()
+            val isEndDateNotBlank = etRegisterItemEndDate.text.toString().isNotBlank()
+            val isStartTimeNotBlank = etRegisterItemStartTime.text.toString().isNotBlank()
+            val isEndTimeNotBlank = etRegisterItemEndTime.text.toString().isNotBlank()
+            val isDescriptionNotBlank = etRegisterItemDescription.text.toString().isNotBlank()
 
-        Log.d("TEST", "$isUrisNotEmpty $isNameNotBlank $isStartPriceNotBlank $isEndPriceNotBlank $isStartDateNotBlank $isEndDateNotBlank $isDescriptionNotBlank")
+            Log.d(
+                "TEST",
+                "$isUrisNotEmpty $isNameNotBlank $isStartPriceNotBlank $isEndPriceNotBlank $isStartDateNotBlank $isEndDateNotBlank $isDescriptionNotBlank",
+            )
 
-        return@with isUrisNotEmpty && isNameNotBlank && isStartPriceNotBlank && isEndPriceNotBlank && isStartDateNotBlank && isStartTimeNotBlank && isEndTimeNotBlank && isEndDateNotBlank && isDescriptionNotBlank
-    }
+            return@with isUrisNotEmpty && isNameNotBlank && isStartPriceNotBlank && isEndPriceNotBlank && isStartDateNotBlank && isStartTimeNotBlank && isEndTimeNotBlank && isEndDateNotBlank && isDescriptionNotBlank
+        }
 }

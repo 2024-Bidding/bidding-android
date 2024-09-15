@@ -22,7 +22,6 @@ internal class CreateItemViewModel(
     private val itemApi: ItemApi,
     private val fileApi: FileApi,
 ) : BaseViewModel<RegisterItemState, RegisterItemSideEffect>(RegisterItemState.getDefaultState()) {
-
     internal val uris: MutableList<Uri> = mutableListOf()
     private val files: MutableList<File> = mutableListOf()
 
@@ -42,21 +41,24 @@ internal class CreateItemViewModel(
         } else {
             viewModelScope.launch(Dispatchers.IO) {
                 itemApi.createItem(
-                    createItemRequest = CreateItemRequest(
-                        name = name,
-                        endPrice = endPrice.toLong(),
-                        startPrice = startPrice.toLong(),
-                        imageUrls = imageUrls,
-                        startTime = makeLocalDateTime(
-                            date = startDate,
-                            time = startTime,
+                    createItemRequest =
+                        CreateItemRequest(
+                            name = name,
+                            endPrice = endPrice.toLong(),
+                            startPrice = startPrice.toLong(),
+                            imageUrls = imageUrls,
+                            startTime =
+                                makeLocalDateTime(
+                                    date = startDate,
+                                    time = startTime,
+                                ),
+                            endTime =
+                                makeLocalDateTime(
+                                    date = endDate,
+                                    time = endTime,
+                                ),
+                            content = content,
                         ),
-                        endTime = makeLocalDateTime(
-                            date = endDate,
-                            time = endTime,
-                        ),
-                        content = content,
-                    )
                 ).onSuccess {
                     postSideEffect(RegisterItemSideEffect.Success)
                 }.onFailure {
@@ -81,22 +83,23 @@ internal class CreateItemViewModel(
     fun createPresignedUrl() {
         viewModelScope.launch(Dispatchers.IO) {
             fileApi.createPresignedUrl(
-                createPresignedUrl = CreatePresignedUrlRequest(
-                    files = files.map { file ->
-                        CreatePresignedUrlRequest.FileRequest(
-                            fileName = file.name,
-                        )
-                    }
-                )
+                createPresignedUrl =
+                    CreatePresignedUrlRequest(
+                        files =
+                            files.map { file ->
+                                CreatePresignedUrlRequest.FileRequest(
+                                    fileName = file.name,
+                                )
+                            },
+                    ),
             ).onSuccess {
                 postSideEffect(
                     RegisterItemSideEffect.SuccessCreatePresignedUrl(
                         filePath = it.urls.map { it.filePath },
                         presignedUrls = it.urls.map { it.preSignedUrl },
-                    )
+                    ),
                 )
             }.onFailure {
-
             }
         }
     }
@@ -123,7 +126,7 @@ internal class CreateItemViewModel(
             FileUtil.toFile(
                 context = context,
                 uri = uri,
-            )
+            ),
         )
     }
 
@@ -135,16 +138,17 @@ internal class CreateItemViewModel(
     private fun makeLocalDateTime(
         date: String,
         time: String,
-    ): String = date.split(".").run {
-        val year = get(0)
-        val month = get(1).padStart(2, '0')
-        val day = get(2).padStart(2, '0')
+    ): String =
+        date.split(".").run {
+            val year = get(0)
+            val month = get(1).padStart(2, '0')
+            val day = get(2).padStart(2, '0')
 
-        val hour = time.split(":")[0].padStart(2, '0')
-        val minute = time.split(":")[1].padStart(2, '0')
+            val hour = time.split(":")[0].padStart(2, '0')
+            val minute = time.split(":")[1].padStart(2, '0')
 
-        "$year-$month-${day}T$hour:$minute:00.000000"
-    }
+            "$year-$month-${day}T$hour:$minute:00.000000"
+        }
 }
 
 internal data class RegisterItemState(
@@ -156,20 +160,23 @@ internal data class RegisterItemState(
     val imageUrls: List<String>,
 ) {
     companion object {
-        fun getDefaultState() = RegisterItemState(
-            imageUrl = "",
-            startDate = LocalDate.now().toString(),
-            endDate = LocalDate.now().toString(),
-            startTime = LocalDateTime.now().toString(),
-            endTime = LocalDateTime.now().toString(),
-            imageUrls = emptyList(),
-        )
+        fun getDefaultState() =
+            RegisterItemState(
+                imageUrl = "",
+                startDate = LocalDate.now().toString(),
+                endDate = LocalDate.now().toString(),
+                startTime = LocalDateTime.now().toString(),
+                endTime = LocalDateTime.now().toString(),
+                imageUrls = emptyList(),
+            )
     }
 }
 
 internal sealed interface RegisterItemSideEffect {
     data object Success : RegisterItemSideEffect
+
     data class Failure(val message: String) : RegisterItemSideEffect
+
     data class SuccessCreatePresignedUrl(
         val filePath: List<String>,
         val presignedUrls: List<String>,

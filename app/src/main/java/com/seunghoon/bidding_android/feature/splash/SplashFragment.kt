@@ -15,13 +15,12 @@ import kotlinx.coroutines.launch
 private const val NAVIGATE_DELAY = 3000L
 
 internal class SplashFragment : Fragment() {
-
     private lateinit var binding: FragmentSplashBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSplashBinding.inflate(inflater)
         val navController = findNavController()

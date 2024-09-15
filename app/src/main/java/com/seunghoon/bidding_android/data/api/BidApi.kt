@@ -27,24 +27,25 @@ internal class BidApi(
                 setBody(bidItemRequest)
                 header(
                     key = "Authorization",
-                    value = localStorage.getValue(LocalStorage.ACCESS_TOKEN)
+                    value = localStorage.getValue(LocalStorage.ACCESS_TOKEN),
                 )
             }
         }
     }
 
-    suspend fun fetchMyBidItems() = runCatching {
-        RequestHandler<ItemsResponse>().request {
-            ktorClient.get {
-                url(RequestUrl.Bid.my)
-                header(
-                    key = "Authorization",
-                    value = localStorage.getValue(LocalStorage.ACCESS_TOKEN)
-                )
-                Json {
-                    ignoreUnknownKeys = true
-                }
-            }.body<ItemsResponse>()
+    suspend fun fetchMyBidItems() =
+        runCatching {
+            RequestHandler<ItemsResponse>().request {
+                ktorClient.get {
+                    url(RequestUrl.Bid.my)
+                    header(
+                        key = "Authorization",
+                        value = localStorage.getValue(LocalStorage.ACCESS_TOKEN),
+                    )
+                    Json {
+                        ignoreUnknownKeys = true
+                    }
+                }.body<ItemsResponse>()
+            }
         }
-    }
 }

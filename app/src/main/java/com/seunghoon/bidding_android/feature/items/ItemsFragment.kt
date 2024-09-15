@@ -15,7 +15,6 @@ import com.seunghoon.bidding_android.navigation.navigateToSearch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class ItemsFragment : Fragment() {
-
     private val binding by lazy {
         FragmentItemsBinding.inflate(layoutInflater)
     }
@@ -31,17 +30,18 @@ internal class ItemsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         initView()
         collectItemsSideEffect()
 
-        itemsAdapter = ItemsAdapter(
-            items = mutableListOf(),
-            navController = navController,
-            viewModel = viewModel,
-            isLikeAdapter = false,
-        )
+        itemsAdapter =
+            ItemsAdapter(
+                items = mutableListOf(),
+                navController = navController,
+                viewModel = viewModel,
+                isLikeAdapter = false,
+            )
 
         return binding.root
     }
@@ -62,13 +62,14 @@ internal class ItemsFragment : Fragment() {
         }
     }
 
-    private fun initView() = with(binding) {
-        setToolbarNavigationIconOnClickListener()
-        rvItems.layoutManager = LinearLayoutManager(context)
-        fabRegisterItem.setOnClickListener {
-            navController.navigateToCreateItem()
+    private fun initView() =
+        with(binding) {
+            setToolbarNavigationIconOnClickListener()
+            rvItems.layoutManager = LinearLayoutManager(context)
+            fabRegisterItem.setOnClickListener {
+                navController.navigateToCreateItem()
+            }
         }
-    }
 
     private fun setToolbarNavigationIconOnClickListener() {
         binding.toolbar.setOnMenuItemClickListener { item ->
@@ -78,7 +79,6 @@ internal class ItemsFragment : Fragment() {
                 }
 
                 R.id.filter -> {
-
                 }
 
                 else -> {}

@@ -18,7 +18,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("SetTextI18n")
 class ItemDetailsFragment : Fragment() {
-
     private lateinit var binding: FragmentItemDetailsBinding
 
     private val navController by lazy {
@@ -36,7 +35,7 @@ class ItemDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentItemDetailsBinding.inflate(inflater)
         handleItemDetailsSideEffect()
@@ -61,20 +60,22 @@ class ItemDetailsFragment : Fragment() {
     private fun setOnClickBidItemButton() {
         binding.btnItemDetailsBid.setOnClickListener {
             binding.details?.run {
-                bidItemDialog = BidItemDialog(
-                    context = requireContext(),
-                    currentPrice = currentPrice,
-                    maxPrice = maxPrice,
-                    bidItemDialogListener = object : BidItemDialogListener {
-                        override fun onBidItemClick(price: Long) {
-                            viewModel.bidItem(
-                                itemId = itemId,
-                                price = price,
-                                maxPrice = maxPrice,
-                            )
-                        }
-                    }
-                )
+                bidItemDialog =
+                    BidItemDialog(
+                        context = requireContext(),
+                        currentPrice = currentPrice,
+                        maxPrice = maxPrice,
+                        bidItemDialogListener =
+                            object : BidItemDialogListener {
+                                override fun onBidItemClick(price: Long) {
+                                    viewModel.bidItem(
+                                        itemId = itemId,
+                                        price = price,
+                                        maxPrice = maxPrice,
+                                    )
+                                }
+                            },
+                    )
                 with(bidItemDialog) {
                     show()
                     window?.setLayout(
@@ -124,18 +125,20 @@ class ItemDetailsFragment : Fragment() {
     }
 
     private fun onSwipedImageAdapter() {
-        binding.vpItemDetailsImage.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                binding.tvItemDetailsPagerCounterText.let {
-                    val max = it.text.split("/")[1]
-                    it.text = "${position + 1}/$max"
+        binding.vpItemDetailsImage.registerOnPageChangeCallback(
+            object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int,
+                ) {
+                    binding.tvItemDetailsPagerCounterText.let {
+                        val max = it.text.split("/")[1]
+                        it.text = "${position + 1}/$max"
+                    }
                 }
-            }
-        })
+            },
+        )
     }
 }

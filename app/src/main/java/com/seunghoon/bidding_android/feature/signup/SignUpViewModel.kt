@@ -17,7 +17,6 @@ internal class SignUpViewModel(
     private val userApi: UserApi,
     private val fileApi: FileApi,
 ) : BaseViewModel<Unit, SignUpSideEffect>(Unit) {
-
     fun signUp(
         email: String,
         name: String,
@@ -32,7 +31,7 @@ internal class SignUpViewModel(
                         password = password,
                         name = name,
                         profileImageUrl = profileImageUrl,
-                    )
+                    ),
                 )
             }.onSuccess {
                 postSideEffect(SignUpSideEffect.Success)
@@ -50,19 +49,22 @@ internal class SignUpViewModel(
         uri: Uri,
         context: Context,
     ) {
-        val file = FileUtil.toFile(
-            context = context,
-            uri = uri,
-        )
+        val file =
+            FileUtil.toFile(
+                context = context,
+                uri = uri,
+            )
         viewModelScope.launch(Dispatchers.IO) {
             fileApi.createPresignedUrl(
-                createPresignedUrl = CreatePresignedUrlRequest(
-                    files = listOf(file).map {
-                        CreatePresignedUrlRequest.FileRequest(
-                            fileName = it.name,
-                        )
-                    }
-                )
+                createPresignedUrl =
+                    CreatePresignedUrlRequest(
+                        files =
+                            listOf(file).map {
+                                CreatePresignedUrlRequest.FileRequest(
+                                    fileName = it.name,
+                                )
+                            },
+                    ),
             ).onSuccess {
                 val response = it.urls.first()
                 fileApi.uploadFile(
@@ -82,6 +84,8 @@ internal class SignUpViewModel(
 
 internal sealed interface SignUpSideEffect {
     data object Success : SignUpSideEffect
+
     data class SuccessFileUpload(val profileImageUrl: String) : SignUpSideEffect
+
     data object EmailAlreadyExists : SignUpSideEffect
 }

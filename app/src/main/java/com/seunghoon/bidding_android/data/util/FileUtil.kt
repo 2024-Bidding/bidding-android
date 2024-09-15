@@ -12,15 +12,17 @@ object FileUtil {
         context: Context,
         uri: Uri,
     ): File {
-        val fileName = getFileName(
-            context = context,
-            uri = uri,
-        )
+        val fileName =
+            getFileName(
+                context = context,
+                uri = uri,
+            )
 
-        val file = createTempFile(
-            context = context,
-            fileName = fileName,
-        )
+        val file =
+            createTempFile(
+                context = context,
+                fileName = fileName,
+            )
         copyToFile(
             context = context,
             uri = uri,

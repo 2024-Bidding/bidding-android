@@ -17,8 +17,6 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
-
-
     private val binding by lazy {
         FragmentSearchBinding.inflate(layoutInflater)
     }
@@ -43,12 +41,11 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         initView()
         collectSearchSideEffect()
         setBackButtonListener()
-
 
         return binding.root
     }
@@ -59,14 +56,16 @@ class SearchFragment : Fragment() {
     }
 
     private fun setSearchBar() {
-        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?) = false
+        binding.svSearch.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(p0: String?) = false
 
-            override fun onQueryTextChange(keyword: String?): Boolean {
-                searchViewModel.updateKeyword(keyword)
-                return true
-            }
-        })
+                override fun onQueryTextChange(keyword: String?): Boolean {
+                    searchViewModel.updateKeyword(keyword)
+                    return true
+                }
+            },
+        )
     }
 
     private fun setItemsAdapter() {

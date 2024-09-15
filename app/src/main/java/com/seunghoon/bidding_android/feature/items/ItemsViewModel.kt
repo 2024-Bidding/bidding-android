@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 internal class ItemsViewModel(
     private val itemApi: ItemApi,
 ) : BaseViewModel<Unit, ItemsSideEffect>(initialState = Unit) {
-
     fun fetchItems() {
         viewModelScope.launch(Dispatchers.IO) {
             itemApi.fetchItems().onSuccess {
@@ -23,7 +22,6 @@ internal class ItemsViewModel(
     fun likeItem(itemId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             itemApi.likeItem(itemId = itemId).onSuccess {
-
             }.onFailure {
                 it.printStackTrace()
             }
@@ -43,5 +41,6 @@ internal class ItemsViewModel(
 
 internal sealed interface ItemsSideEffect {
     data class Success(val items: List<ItemsEntity.ItemEntity>) : ItemsSideEffect
+
     data class Failure(val message: String) : ItemsSideEffect
 }

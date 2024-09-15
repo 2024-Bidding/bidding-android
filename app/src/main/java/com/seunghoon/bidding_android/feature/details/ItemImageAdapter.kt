@@ -8,26 +8,27 @@ import com.seunghoon.bidding_android.databinding.ItemDetailsImageBinding
 
 internal class ItemImageAdapter(val images: List<String>) :
     RecyclerView.Adapter<ItemImageAdapter.ItemImageViewHolder>() {
-
     class ItemImageViewHolder(val binding: ItemDetailsImageBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ItemImageViewHolder {
         val binding =
             ItemDetailsImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemImageViewHolder(binding = binding)
     }
 
-    override fun onBindViewHolder(holder: ItemImageViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ItemImageViewHolder,
+        position: Int,
+    ) {
         val imageView = holder.binding.imgItemDetails
         Glide.with(holder.itemView.context)
             .load("https://jobis-store.s3.ap-northeast-2.amazonaws.com/" + images[position])
             .into(imageView)
     }
-
 
     override fun getItemCount(): Int {
         return images.size

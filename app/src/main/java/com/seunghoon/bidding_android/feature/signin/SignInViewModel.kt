@@ -15,7 +15,6 @@ internal class SignInViewModel(
     private val userApi: UserApi,
     private val localStorage: LocalStorage,
 ) : BaseViewModel<Unit, SignInSideEffect>(Unit) {
-
     fun signIn(
         email: String,
         password: String,
@@ -23,10 +22,11 @@ internal class SignInViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 userApi.signIn(
-                    signInRequest = SignInRequest(
-                        email = email,
-                        password = password,
-                    )
+                    signInRequest =
+                        SignInRequest(
+                            email = email,
+                            password = password,
+                        ),
                 )
             }.onSuccess {
                 localStorage.putValue(
@@ -47,6 +47,8 @@ internal class SignInViewModel(
 
 internal sealed interface SignInSideEffect {
     data class Success(val message: String) : SignInSideEffect
+
     data class NotFoundEmail(val message: String) : SignInSideEffect
+
     data class InvalidPassword(val message: String) : SignInSideEffect
 }
